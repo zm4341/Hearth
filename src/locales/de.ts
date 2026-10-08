@@ -625,6 +625,7 @@ export const de: Translations = {
 			tabs: {
 				general: "Allgemein",
 				plugin: "Plugin-Ansicht",
+				single: "Karte",
 				header: "Kopfzeile",
 				layout: "Layout",
 				style: "Stil",
@@ -633,13 +634,20 @@ export const de: Translations = {
 			name: "Name",
 			mode: "Dashboard-Typ",
 			modeDesc:
-				"Ein Board aus Hearth-Karten oder das ganze Board für die Ansicht eines Plugins. Beim Wechsel zur Plugin-Ansicht bleiben die Karten dieses Boards erhalten - wechsle zurück und sie sind wieder da.",
+				"Ein Board aus Hearth-Karten, eine einzelne Hearth-Karte über das ganze Board oder das ganze Board für die Ansicht eines Plugins. Beim Wechsel des Typs bleiben die Karten dieses Boards erhalten — wechsle zurück und sie sind wieder da.",
 			modeOptions: {
 				cards: "Karten",
+				single: "Einzelne Karte",
 				plugin: "Plugin-Ansicht",
 			},
 			modePickViewHint:
 				"Dieses Board hat noch keine Ansicht - wähle eine auf dem Reiter „Plugin-Ansicht“.",
+			modePickCardHint: "Dieses Board hat noch keine Karte — füge im Tab „Karte“ eine hinzu.",
+			singleCard: "Karte",
+			singleCardDesc:
+				"Welche Karte dieses Boards es ausfüllt. Die anderen bleiben auf dem Board und kommen zurück, wenn es wieder auf Karten umgestellt wird.",
+			singleCardEdit: "Karte bearbeiten",
+			singleCardAdd: "Neue Karte hinzufügen",
 			pluginViewType: "Ansicht",
 			pluginViewTypeDesc:
 				"Welche registrierte Ansicht dieses Board füllt. Die Liste enthält jede Ansicht, die die App gerade hat, und folgt daher den aktivierten Plugins.",
@@ -750,6 +758,8 @@ export const de: Translations = {
 				"Das Hearth-Hintergrundbild auf diesem Board: klassische Hügel oder flache Formen im Stil von Material 3 Expressive in deiner Akzentfarbe.",
 			visibilityDefaultPlugin: (state: string) =>
 				`Standard auf einem Plugin-Board (${state})`,
+			visibilityDefaultSingle: (state: string) =>
+				`Standard auf einem Einzelkarten-Board (${state})`,
 			visibilityShown: "angezeigt",
 			visibilityHidden: "ausgeblendet",
 			visibilityShow: "Titel anzeigen",
@@ -787,6 +797,8 @@ export const de: Translations = {
 			fitOptionScroll: "Scrollen erlauben",
 			fitToPagePluginNote:
 				"Ein Plugin-Board passt immer in den Bereich - die gehostete Ansicht füllt ihn und scrollt selbst.",
+			fitToPageSingleNote:
+				"Ein Einzelkarten-Board füllt immer den Bereich — die Karte füllt ihn aus und scrollt selbst.",
 			themeColorTarget: "Akzentfarbe am Titel",
 			themeColorTargetDesc:
 				"Welche Teile des Brandings dieses Boards der Icon-Farbe des Themes folgen. Überschreibt die globale Einstellung für dieses Board; Hearth-Tab- und Ribbon-Icons folgen weiter der globalen.",
@@ -1442,6 +1454,13 @@ export const de: Translations = {
 						"Dasselbe für Iconize (ehemals Obsidian Icon Folder), einschließlich Symbolen, " +
 						"die über eine Frontmatter-Eigenschaft gesetzt wurden.",
 				},
+				frontMatterTitle: {
+					name: "Front Matter Title",
+					desc:
+						"Ordnerkarten und der Ordner-Browser zeigen Notizen mit den Titeln, " +
+						"die Front Matter Title im Datei-Explorer anzeigt, statt mit ihren " +
+						"Dateinamen.",
+				},
 				vaultPet: {
 					name: "Vault Pet",
 					desc:
@@ -1600,6 +1619,21 @@ export const de: Translations = {
 				"Eigenschaft, in der Iconize das Symbol einer Notiz speichert, für Symbole, die über " +
 				"Frontmatter statt über sein Menü gesetzt wurden. Gleiche dies mit Iconizes eigener " +
 				"Einstellung ab, falls du sie umbenannt hast (Standard ist „icon“).",
+		},
+		frontMatterTitle: {
+			heading: "Front Matter Title",
+			headingDesc:
+				"Zeigt Notizen so wie der Datei-Explorer, wenn das Plugin Front Matter " +
+				"Title ihnen einen Titel gibt: Ordnerkarten und der Ordner-Browser " +
+				"listen jede Notiz unter diesem Titel statt unter ihrem Dateinamen. " +
+				"Folgt der Explorer-Einstellung des Plugins — solange seine " +
+				"Explorer-Funktion aus ist, werden Dateinamen gezeigt.",
+			enable: "Titel aus Front Matter Title verwenden",
+			enableDesc: "Aus zeigt jede Notiz mit ihrem Dateinamen und ignoriert das Plugin.",
+			enableDescNoPlugin:
+				"Front Matter Title ist gerade nicht aktiviert, daher werden Notizen " +
+				"mit ihren Dateinamen gezeigt. Das kann eingeschaltet bleiben — es " +
+				"greift, sobald das Plugin installiert ist.",
 		},
 		operon: {
 			heading: "Operon",
@@ -2095,6 +2129,27 @@ export const de: Translations = {
 				"Ein Klick auf die freie Fläche der Karte — oder auf ihre " +
 				"Ordner-Schaltfläche — öffnet den Ordner in einem Browser mit " +
 				"Pfadleiste, in dem jeder Ordner geöffnet werden kann.",
+			browseIn: "Browser öffnen",
+			browseInDesc:
+				"In einem Dialog über dem Board — mit einer Schaltfläche, die ihn in " +
+				"einen Tab verschiebt — oder direkt in einem eigenen Tab, wo der " +
+				"Ordner die ganze Seite hat.",
+			browseInModal: "In einem Dialog",
+			browseInTab: "In einem neuen Tab",
+			browserView: "Layout des Browsers",
+			browserViewDesc:
+				"Wie der Browser den Ordner zeigt, unabhängig von der Karte: eine " +
+				"Liste von Zeilen oder größere Kacheln mit einer Vorschau jeder Notiz.",
+			preview: "Notizvorschau",
+			previewDesc: "Zeigt die ersten Zeilen des Textes jeder Notiz auf ihrer Kachel, ohne ihre Eigenschaften.",
+			previewSize: "Schriftgröße der Vorschau",
+			previewSizeDesc: "In Pixeln. Standardmäßig klein — genug, um eine Notiz wiederzuerkennen.",
+			images: "Bildvorschau",
+			imagesDesc:
+				"Bilder zeigen sich selbst auf ihrer Kachel, und eine Notiz zeigt ihr " +
+				"erstes eingebettetes Bild als Titelbild. Nur in der Leistungsstufe " +
+				"„Voll“: Ein Bild ist die ganze dekodierte Datei, und genau das sollen " +
+				"die leichteren Stufen vermeiden.",
 		},
 		calendar: {
 			view: "Layout",
@@ -2129,45 +2184,9 @@ export const de: Translations = {
 			refreshDesc: "Wie oft Kalender neu geladen werden, in Minuten. 0 lädt nur beim Öffnen.",
 			eventNoteHeading: "Terminnotizen",
 			eventNoteDesc:
-				"Richte die „Notiz erstellen“-Aktion im Termin-Popup ein: Wähle eine Vorlage, einen Ordner und Dateinamen, und lege fest, was mit jedem Terminwert passiert.",
+				"Die Notiz, die „Notiz erstellen“ im Termin-Popup anlegt. Sie funktioniert wie eine Vorlage des Obsidian Web Clippers: Name, Ordner, typisierte Eigenschaften und Inhalt, jeweils mit {{Variablen}} und Filtern.",
 			eventNoteEnabled: "„Notiz erstellen“ anzeigen",
 			eventNoteEnabledDesc: "Biete einen Button zum Erstellen einer Notiz im Termin-Details-Popup.",
-			eventNoteFolder: "Ordner",
-			eventNoteFolderDesc: "Wo neue Terminnotizen erstellt werden. Leer = Vault-Stamm.",
-			eventNoteFilename: "Dateiname",
-			eventNoteFilenameDesc: "Notizname. Platzhalter: {{summary}}, {{date}}, {{start}}, {{location}}, …",
-			eventNoteTemplate: "Vorlage",
-			eventNoteTemplateDesc:
-				"Optionale Notiz, deren Inhalt den Text vorgibt. Dieselben {{…}}-Platzhalter werden ersetzt.",
-			eventNotePickTemplate: "Vorlagendatei wählen",
-			eventNoteClearTemplate: "Vorlage entfernen",
-			eventNoteLinkKey: "Link-Eigenschaft",
-			eventNoteLinkKeyDesc:
-				"Frontmatter-Eigenschaft, die die ID des Termins speichert, sodass ein Termin immer genau einer Notiz zugeordnet ist. Leer, um die Verknüpfung zu deaktivieren.",
-			eventNoteCustomize: "Feldzuordnung anpassen",
-			eventNoteCustomizeDesc:
-				"Aus nutzt sinnvolle Vorgaben (Datum & Uhrzeit als Eigenschaften, Beschreibung im Text). An lässt dich jeden Wert selbst zuordnen.",
-			eventNoteFieldsHeading: "Feldzuordnung",
-			eventNoteAddField: "Feld hinzufügen",
-			eventNoteRemoveField: "Entfernen",
-			eventFieldNames: {
-				summary: "Name",
-				date: "Datum",
-				start: "Startzeit",
-				end: "Endzeit",
-				location: "Ort",
-				description: "Beschreibung",
-				url: "URL",
-				calendar: "Kalender",
-			},
-			eventFieldActions: {
-				ignore: "Ignorieren",
-				frontmatter: "Eigenschaft",
-				body: "An Text anhängen",
-			},
-			eventNotePropertyPlaceholder: "Eigenschaftsname",
-			eventNoteHeadingPlaceholder: "Überschrift (optional)",
-			eventNoteFormatPlaceholder: "Format (z. B. HH:mm)",
 			chipsHeading: "Eintragsdetails",
 			chipsDesc:
 				"Wähle, was jeder Agenda-Eintrag neben seinem Titel zeigt. Schalte aus, was du nicht brauchst - auf einer schmalen Karte konkurrieren die Markierungen mit dem Titel selbst.",
@@ -2982,6 +3001,103 @@ export const de: Translations = {
 			showFile: "Notiznamen anzeigen",
 			noOptions: "Füge zuerst eine Operon-Karte zum Board hinzu, um diese Optionen zu laden",
 		},
+		clip: {
+			name: "Notizname",
+			nameDesc: "Der Name der neuen Notiz. Jedes Feld hier versteht {{Variablen}}.",
+			folder: "Ordner",
+			folderDesc: "Wohin neue Notizen kommen. Auch hier gehen Variablen, z. B. Clippings/{{feed}}. Leer = Tresor-Wurzel.",
+			folderPlaceholder: "Tresor-Wurzel",
+			pickFolder: "Ordner wählen",
+			properties: "Eigenschaften",
+			propertiesDesc: "Jeder Wert ist eine Vorlage. Eine Eigenschaft, die leer herauskommt, fehlt in der Notiz.",
+			propertyName: "Name",
+			propertyValue: "Wert, z. B. {{title}}",
+			addProperty: "Eigenschaft hinzufügen",
+			removeProperty: "Eigenschaft entfernen",
+			resetProperties: "Zurück zu den Standard-Eigenschaften",
+			types: {
+				text: "Text",
+				list: "Liste",
+				number: "Zahl",
+				checkbox: "Kontrollkästchen",
+				date: "Datum",
+				datetime: "Datum & Uhrzeit",
+			},
+			body: "Notizinhalt",
+			bodyDesc: "Der Text der Notiz.",
+			resetBody: "Zurück zum Standardinhalt",
+			template: "Vorlagennotiz",
+			templateDesc: "Optional. Ihr Text eröffnet den Inhalt, mit denselben Variablen gefüllt.",
+			pickTemplate: "Vorlagennotiz wählen",
+			clearTemplate: "Vorlage entfernen",
+			linkKey: "Verknüpfungs-Eigenschaft",
+			linkKeyDesc: "Merkt sich, woraus die Notiz entstand, damit dasselbe Element seine Notiz öffnet statt eine weitere anzulegen. Leer: immer eine neue Notiz.",
+			variables: "Variablen",
+			variablesHint: "Klicke eine an, um sie an der Cursorposition einzufügen.",
+			filters: "Filter",
+			filtersHint: "Filter mit | an eine Variable hängen, z. B. {{published|date:\"D. MMMM YYYY\"}} oder {{title|lower|truncate:40}}.",
+			vars: {
+				title: "Der Titel",
+				date: "Der Tag, an dem es stattfindet",
+				start: "Wann es beginnt",
+				end: "Wann es endet",
+				location: "Wo es stattfindet",
+				description: "Die Beschreibung",
+				url: "Der Link",
+				calendar: "Der Name des Kalenders",
+				uid: "Die ID des Termins",
+				link: "Die Webadresse des Eintrags",
+				content: "Der volle Text, als Markdown",
+				html: "Der volle Text, wie der Feed ihn schickt (HTML)",
+				excerpt: "Eine kurze Zusammenfassung als Text",
+				published: "Wann er erschien",
+				author: "Wer ihn schrieb",
+				feed: "Der Name des Feeds",
+				feedUrl: "Die Adresse des Feeds",
+				categories: "Seine Kategorien, als Liste",
+				image: "Die Adresse seines Bildes",
+				id: "Die ID des Eintrags im Feed",
+				today: "Das heutige Datum",
+				now: "Datum und Uhrzeit jetzt",
+			},
+			filterDocs: {
+				date: { syntax: "date:\"YYYY-MM-DD\"", desc: "Datum formatieren (moment.js-Kürzel)" },
+				lower: { syntax: "lower", desc: "kleinschreibung" },
+				upper: { syntax: "upper", desc: "GROSSSCHREIBUNG" },
+				title: { syntax: "title", desc: "Jedes Wort Groß" },
+				capitalize: { syntax: "capitalize", desc: "Erster Buchstabe groß" },
+				trim: { syntax: "trim", desc: "Leerzeichen an den Enden entfernen" },
+				truncate: { syntax: "truncate:80", desc: "Auf eine Länge kürzen, mit …" },
+				replace: { syntax: "replace:\"a\",\"b\"", desc: "Jedes a durch b ersetzen" },
+				default: { syntax: "default:\"Text\"", desc: "Dies nehmen, wenn der Wert leer ist" },
+				split: { syntax: "split:\",\"", desc: "Text in eine Liste teilen" },
+				join: { syntax: "join:\", \"", desc: "Liste zu Text verbinden" },
+				first: { syntax: "first", desc: "Erstes Element einer Liste" },
+				last: { syntax: "last", desc: "Letztes Element einer Liste" },
+				list: { syntax: "list", desc: "Markdown-Aufzählung" },
+				wikilink: { syntax: "wikilink", desc: "Jedes Element als [[Link]]" },
+				link: { syntax: "link:\"Bezeichnung\"", desc: "Markdown-Link auf die Adresse" },
+				blockquote: { syntax: "blockquote", desc: "Jede Zeile mit > zitieren" },
+				safe_name: { syntax: "safe_name", desc: "Zeichen entfernen, die kein Dateiname enthalten darf" },
+			},
+			preview: "Vorschau",
+			previewOf: (name: string) => `Gefüllt aus „${name}“.`,
+			previewSample: "Gefüllt aus einem erfundenen Beispiel.",
+			previewTemplate: (path: string) => `(zuerst der Text von ${path})`,
+			copied: (text: string) => `${text} kopiert`,
+			sampleEvent: {
+				title: "Projektstart",
+				location: "Raum 4",
+				description: "Agenda: Ziele, Verantwortliche, erster Meilenstein.",
+				calendar: "Arbeit",
+			},
+			sampleEntry: {
+				title: "Wochenrückblick Nr. 42",
+				feed: "Beispiel-Newsletter",
+				author: "Erika Mustermann",
+				content: "Diese Woche: drei Dinge, die sich zu lesen lohnen, und eines, das man auslassen kann.",
+			},
+		},
 		rss: {
 			feeds: "Feeds",
 			namePlaceholder: "Name (optional)",
@@ -3018,6 +3134,23 @@ export const de: Translations = {
 			showExcerptDesc: "Einen kurzen Textausschnitt unter jedem Eintrag zeigen.",
 			showDate: "Datum anzeigen",
 			showDateDesc: "Die Veröffentlichungszeit jedes Eintrags zeigen.",
+			reading: "Lesen",
+			openIn: "Einträge öffnen in",
+			openInDesc: "Wohin ein Klick auf einen Eintrag führt. Ein Eintrag ohne Webseite – etwa ein Newsletter – öffnet sich immer im Leser von Hearth.",
+			openInBrowser: "Browser",
+			openInDialog: "Leser (Dialog)",
+			openInTab: "Leser (Tab)",
+			readerImages: "Bilder im Leser",
+			readerImagesDesc: "Ein Bild wird vom Server des Absenders geladen, und der erfährt so, dass du den Eintrag geöffnet hast – Newsletter rechnen damit. „Fragen“ zeigt eine Schaltfläche zum Laden.",
+			imagesAsk: "Fragen",
+			imagesAlways: "Immer laden",
+			imagesNever: "Nie laden",
+			unreadOnly: "Nur ungelesene",
+			unreadOnlyDesc: "Nur Einträge zeigen, die du noch nicht geöffnet hast. Der Filterknopf auf der Karte schaltet das ebenfalls.",
+			noteHeading: "Als Notiz speichern",
+			noteDesc: "Was „Als Notiz speichern“ im Leser aus einem Eintrag macht – eine Vorlage wie beim Obsidian Web Clipper: jedes Feld versteht {{Variablen}}, Filter formen sie.",
+			noteEnabled: "„Als Notiz speichern“ anbieten",
+			noteEnabledDesc: "Die Aktion im Leser und im Menü eines Eintrags zeigen.",
 		},
 		market: {
 			symbols: "Symbole",
@@ -3432,6 +3565,7 @@ export const de: Translations = {
 			renderFailed: "Diese Karte konnte nicht gezeichnet werden - Details findest du in der Konsole",
 			leafPickView: "Wähle eine Plugin-Ansicht in den Karteneinstellungen",
 			boardPickView: "Wähle eine Ansicht für dieses Board in den Dashboard-Einstellungen",
+			boardPickCard: "Dieses Board hat noch keine Karte — füge eine hinzu",
 			boardNeedsFile: "Wähle eine Datei für dieses Board in den Dashboard-Einstellungen",
 			leafViewMissing:
 				"Diese Ansicht ist nicht verfügbar - aktiviere das Plugin, das sie bereitstellt",
@@ -3464,6 +3598,15 @@ export const de: Translations = {
 			/** The path row's back arrow, and the vault's own name in it. */
 			up: (name: string) => `Zurück zu ${name}`,
 			vaultRoot: "Vault-Wurzel",
+			/** The browser's own controls, beside the breadcrumb. */
+			showList: "Als Liste zeigen",
+			showTiles: "Als Kacheln zeigen",
+			openInTab: "In neuem Tab öffnen",
+			/** Folding a subfolder's section in the browser, one or all of them. */
+			collapse: (name: string) => `${name} einklappen`,
+			expand: (name: string) => `${name} ausklappen`,
+			collapseAll: "Alle Ordner einklappen",
+			expandAll: "Alle Ordner ausklappen",
 		},
 		operon: {
 			loading: "Lese Operon…",
@@ -3563,6 +3706,38 @@ export const de: Translations = {
 			error: "Dieser Feed konnte nicht geladen werden",
 			disabled: "Feeds sind aus (externe Aufrufe deaktiviert)",
 			refresh: "Aktualisieren",
+			nothingToOpen: "Dieser Eintrag hat weder Link noch Text zum Öffnen.",
+			allFeeds: "Alle Feeds",
+			allRead: "Alles gelesen",
+			unreadOnly: "Nur ungelesene zeigen",
+			showAll: "Alle Einträge zeigen",
+			markAllRead: "Alle als gelesen markieren",
+			markRead: "Als gelesen markieren",
+			markUnread: "Als ungelesen markieren",
+			readHere: "In Hearth lesen",
+			openTab: "In neuem Tab lesen",
+			openBrowser: "Im Browser öffnen",
+			saveNote: "Als Notiz speichern",
+			openNote: "Gespeicherte Notiz öffnen",
+			copyLink: "Link kopieren",
+			linkCopied: "Link kopiert",
+			reader: {
+				title: "Leser",
+				gone: "Diese Feed-Karte gibt es nicht mehr.",
+				noItems: "Hier gibt es nichts zu lesen.",
+				toggleList: "Liste ein- oder ausblenden",
+				prevFeed: "Vorheriger Feed",
+				nextFeed: "Nächster Feed",
+				popOut: "In einem Tab öffnen",
+				prev: "Zurück",
+				next: "Weiter",
+				position: (at: number, of: number) => `${at} von ${of}`,
+				keys: "← → Einträge · [ ] Feeds · o öffnen · s speichern · u ungelesen · i Bilder · l Liste",
+				imagesBlocked: (n: number) => (n === 1 ? "1 Bild nicht geladen." : `${n} Bilder nicht geladen.`),
+				loadImages: "Bilder laden",
+				noteSaved: (path: string) => `Gespeichert als ${path}`,
+				noteFailed: "Die Notiz konnte nicht erstellt werden.",
+			},
 		},
 		market: {
 			types: {
@@ -4807,8 +4982,8 @@ export const de: Translations = {
 			gitFoot: "Enter öffnet · Leertaste stagt · Entf verwirft · r liest neu",
 			rssOpen: "Im Browser öffnen",
 			copyLink: "Link kopieren",
-			rssFoot: "Enter öffnet im Browser · r aktualisiert",
-			rssFootTabs: "Enter öffnet im Browser · ←/→ Quelle · r aktualisiert",
+			rssFoot: "Enter öffnet · u gelesen/ungelesen · A alle gelesen · f nur ungelesene · r aktualisieren",
+			rssFootTabs: "Enter öffnet · ←/→ Quelle · u gelesen/ungelesen · A alle gelesen · f nur ungelesene · r aktualisieren",
 			jiraKey: "SCHLÜSSEL",
 			jiraType: "TYP",
 			jiraPriority: "PRIORITÄT",

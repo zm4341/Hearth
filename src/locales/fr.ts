@@ -590,6 +590,7 @@ export const fr: Translations = {
 			tabs: {
 				general: "Général",
 				plugin: "Vue de plugin",
+				single: "Carte",
 				header: "En-tête",
 				layout: "Disposition",
 				style: "Style",
@@ -598,13 +599,20 @@ export const fr: Translations = {
 			name: "Nom",
 			mode: "Type de tableau",
 			modeDesc:
-				"Un tableau de cartes Hearth, ou tout le tableau confié à la vue d'un plugin. Passer à une vue de plugin conserve les cartes de ce tableau — revenez en arrière et elles réapparaissent.",
+				"Un tableau de cartes Hearth, une seule carte Hearth occupant tout le tableau, ou tout le tableau confié à la vue d'un plugin. Changer de type conserve les cartes de ce tableau — revenez en arrière et elles réapparaissent.",
 			modeOptions: {
 				cards: "Cartes",
+				single: "Carte unique",
 				plugin: "Vue de plugin",
 			},
 			modePickViewHint:
 				"Ce tableau n'a pas encore de vue — choisissez-en une dans l'onglet Vue de plugin.",
+			modePickCardHint: "Ce tableau n'a pas encore de carte — ajoutez-en une dans l'onglet Carte.",
+			singleCard: "Carte",
+			singleCardDesc:
+				"Quelle carte de ce tableau l'occupe. Les autres restent sur le tableau et reviennent s'il repasse en mode cartes.",
+			singleCardEdit: "Modifier la carte",
+			singleCardAdd: "Ajouter une nouvelle carte",
 			pluginViewType: "Vue",
 			pluginViewTypeDesc:
 				"Quelle vue enregistrée remplit ce tableau. La liste contient toutes les vues actuellement disponibles, elle dépend donc des plugins activés.",
@@ -715,6 +723,8 @@ export const fr: Translations = {
 				"Le fond d'écran Hearth sur ce tableau : collines classiques, ou formes plates Material 3 Expressive dans votre couleur d'accent.",
 			visibilityDefaultPlugin: (state: string) =>
 				`Par défaut sur un tableau de plugin (${state})`,
+			visibilityDefaultSingle: (state: string) =>
+				`Par défaut sur un tableau à carte unique (${state})`,
 			visibilityShown: "affiché",
 			visibilityHidden: "masqué",
 			visibilityShow: "Afficher le titre",
@@ -752,6 +762,8 @@ export const fr: Translations = {
 			fitOptionScroll: "Autoriser le défilement",
 			fitToPagePluginNote:
 				"Un tableau de plugin remplit toujours le panneau — la vue hébergée l'occupe et gère son propre défilement.",
+			fitToPageSingleNote:
+				"Un tableau à carte unique occupe toujours tout le volet — la carte le remplit et défile elle-même.",
 			themeColorTarget: "Couleur d'accent sur le titre",
 			themeColorTargetDesc:
 				"Quelles parties du logo de ce tableau suivent la couleur d'icône du thème. Remplace le paramètre global pour ce tableau ; les icônes d'onglet et du ruban de Hearth suivent toujours le paramètre global.",
@@ -1383,6 +1395,13 @@ export const fr: Translations = {
 						"Pareil pour Iconize (anciennement Obsidian Icon Folder), y compris les icônes " +
 						"définies via une propriété de frontmatter.",
 				},
+				frontMatterTitle: {
+					name: "Front Matter Title",
+					desc:
+						"Les cartes Dossier et le navigateur de dossiers affichent les notes " +
+						"sous les titres que Front Matter Title leur donne dans l'explorateur " +
+						"de fichiers, au lieu de leurs noms de fichier.",
+				},
 				vaultPet: {
 					name: "Vault Pet",
 					desc:
@@ -1539,6 +1558,22 @@ export const fr: Translations = {
 				"La propriété où Iconize stocke l'icône d'une note, pour les icônes définies via " +
 				"le frontmatter plutôt que son menu. Faites-la correspondre au paramètre d'Iconize " +
 				"si vous l'avez renommée (par défaut « icon »).",
+		},
+		frontMatterTitle: {
+			heading: "Front Matter Title",
+			headingDesc:
+				"Affiche les notes comme l'explorateur de fichiers lorsque le plugin " +
+				"Front Matter Title leur donne un titre : les cartes Dossier et le " +
+				"navigateur de dossiers listent chaque note sous ce titre plutôt que " +
+				"sous son nom de fichier. Suit le réglage d'explorateur du plugin — " +
+				"tant que sa fonction explorateur est désactivée, les noms de fichier " +
+				"sont affichés.",
+			enable: "Utiliser les titres de Front Matter Title",
+			enableDesc: "Désactivé, chaque note est listée par son nom de fichier, sans tenir compte du plugin.",
+			enableDescNoPlugin:
+				"Front Matter Title n'est pas activé pour le moment, les notes sont " +
+				"donc listées par leur nom de fichier. Vous pouvez laisser ce réglage " +
+				"activé : il prendra effet dès que le plugin sera installé.",
 		},
 		operon: {
 			heading: "Operon",
@@ -2032,6 +2067,27 @@ export const fr: Translations = {
 				"Cliquer sur l'espace vide de la carte — ou sur son bouton dossier — ouvre le " +
 				"dossier dans un navigateur avec fil d'Ariane, où l'on peut entrer dans " +
 				"chaque dossier.",
+			browseIn: "Ouvrir le navigateur",
+			browseInDesc:
+				"Dans une fenêtre au-dessus du tableau — avec un bouton qui la déplace " +
+				"dans un onglet — ou directement dans un onglet à part, où le dossier " +
+				"dispose de toute la page.",
+			browseInModal: "Dans une fenêtre",
+			browseInTab: "Dans un nouvel onglet",
+			browserView: "Disposition du navigateur",
+			browserViewDesc:
+				"Comment le navigateur affiche le dossier, indépendamment de la carte : " +
+				"une liste de lignes, ou de plus grandes tuiles avec un aperçu de chaque note.",
+			preview: "Aperçu des notes",
+			previewDesc: "Affiche les premières lignes du texte de chaque note sur sa tuile, sans ses propriétés.",
+			previewSize: "Taille du texte de l'aperçu",
+			previewSizeDesc: "En pixels. Petite par défaut — assez pour reconnaître une note.",
+			images: "Aperçu des images",
+			imagesDesc:
+				"Les images s'affichent sur leur tuile, et une note montre sa première " +
+				"image intégrée en couverture. Uniquement au niveau de performance " +
+				"« Complet » : une image, c'est le fichier entier décodé, ce que les " +
+				"niveaux plus légers sont là pour éviter.",
 		},
 		calendar: {
 			view: "Disposition",
@@ -2066,45 +2122,9 @@ export const fr: Translations = {
 			refreshDesc: "Fréquence de récupération des calendriers, en minutes. 0 = uniquement à l'ouverture.",
 			eventNoteHeading: "Notes d'événement",
 			eventNoteDesc:
-				"Configurer l'action « Créer une note » de la fenêtre d'événement : choisissez un modèle, un dossier et un nom de fichier, et décidez du sort de chaque valeur de l'événement.",
+				"La note que crée « Créer une note » dans la fenêtre d'événement. Elle fonctionne comme un modèle de l'Obsidian Web Clipper : un nom, un dossier, des propriétés typées et un contenu, chacun acceptant des {{variables}} et des filtres.",
 			eventNoteEnabled: "Afficher « Créer une note »",
 			eventNoteEnabledDesc: "Proposer un bouton de création de note dans les détails de l'événement.",
-			eventNoteFolder: "Dossier",
-			eventNoteFolderDesc: "Où créer les nouvelles notes d'événement. Vide = racine du coffre.",
-			eventNoteFilename: "Nom du fichier",
-			eventNoteFilenameDesc: "Nom de la note. Variables : {{summary}}, {{date}}, {{start}}, {{location}}, …",
-			eventNoteTemplate: "Modèle",
-			eventNoteTemplateDesc:
-				"Note facultative dont le contenu sert de base au corps. Les mêmes variables {{…}} sont remplacées.",
-			eventNotePickTemplate: "Choisir le fichier modèle",
-			eventNoteClearTemplate: "Retirer le modèle",
-			eventNoteLinkKey: "Propriété de lien",
-			eventNoteLinkKeyDesc:
-				"Propriété de frontmatter qui stocke l'ID de l'événement, pour qu'un événement corresponde toujours à une seule note. Vide pour désactiver le lien.",
-			eventNoteCustomize: "Personnaliser le routage des champs",
-			eventNoteCustomizeDesc:
-				"Désactivé : valeurs par défaut sensées (date et heure en propriétés, description dans le corps). Activé : vous choisissez où va chaque valeur.",
-			eventNoteFieldsHeading: "Routage des champs",
-			eventNoteAddField: "Ajouter un champ",
-			eventNoteRemoveField: "Retirer",
-			eventFieldNames: {
-				summary: "Nom",
-				date: "Date",
-				start: "Heure de début",
-				end: "Heure de fin",
-				location: "Lieu",
-				description: "Description",
-				url: "URL",
-				calendar: "Calendrier",
-			},
-			eventFieldActions: {
-				ignore: "Ignorer",
-				frontmatter: "Propriété",
-				body: "Ajouter au corps",
-			},
-			eventNotePropertyPlaceholder: "Nom de la propriété",
-			eventNoteHeadingPlaceholder: "Titre de section (facultatif)",
-			eventNoteFormatPlaceholder: "Format (ex. HH:mm)",
 			chipsHeading: "Détails des entrées",
 			chipsDesc:
 				"Choisissez ce que chaque entrée de l'agenda affiche à côté de son titre. Désactivez ce dont vous n'avez pas besoin — sur une carte étroite, les marqueurs font concurrence au titre.",
@@ -2920,6 +2940,103 @@ export const fr: Translations = {
 			showFile: "Afficher le nom de la note",
 			noOptions: "Ajoutez d'abord une carte Operon au tableau pour charger ces options",
 		},
+		clip: {
+			name: "Nom de la note",
+			nameDesc: "Le nom de la nouvelle note. Chaque champ ici accepte des {{variables}}.",
+			folder: "Dossier",
+			folderDesc: "Où vont les nouvelles notes. Les variables marchent ici aussi, p. ex. Clippings/{{feed}}. Vide = racine du coffre.",
+			folderPlaceholder: "Racine du coffre",
+			pickFolder: "Choisir un dossier",
+			properties: "Propriétés",
+			propertiesDesc: "Chaque valeur est un modèle. Une propriété qui sort vide est omise de la note.",
+			propertyName: "Nom",
+			propertyValue: "Valeur, p. ex. {{title}}",
+			addProperty: "Ajouter une propriété",
+			removeProperty: "Supprimer la propriété",
+			resetProperties: "Revenir aux propriétés par défaut",
+			types: {
+				text: "Texte",
+				list: "Liste",
+				number: "Nombre",
+				checkbox: "Case à cocher",
+				date: "Date",
+				datetime: "Date et heure",
+			},
+			body: "Contenu de la note",
+			bodyDesc: "Le corps de la note.",
+			resetBody: "Revenir au contenu par défaut",
+			template: "Note modèle",
+			templateDesc: "Facultatif. Son texte ouvre le contenu, avec les mêmes variables remplies.",
+			pickTemplate: "Choisir une note modèle",
+			clearTemplate: "Retirer le modèle",
+			linkKey: "Propriété de lien",
+			linkKeyDesc: "Retient d'où vient la note, pour que le même élément rouvre sa note au lieu d'en créer une autre. Vide : toujours une nouvelle note.",
+			variables: "Variables",
+			variablesHint: "Cliquez sur l'une d'elles pour l'insérer à l'emplacement du curseur.",
+			filters: "Filtres",
+			filtersHint: "Enchaînez les filtres après une variable avec |, p. ex. {{published|date:\"D MMMM YYYY\"}} ou {{title|lower|truncate:40}}.",
+			vars: {
+				title: "Le titre",
+				date: "Le jour où il a lieu",
+				start: "Quand il commence",
+				end: "Quand il finit",
+				location: "Où il a lieu",
+				description: "Sa description",
+				url: "Son lien",
+				calendar: "Le nom du calendrier",
+				uid: "L'identifiant de l'événement",
+				link: "L'adresse web de l'article",
+				content: "Le texte complet, en Markdown",
+				html: "Le texte complet tel que le flux l'envoie (HTML)",
+				excerpt: "Un court résumé en texte brut",
+				published: "Quand il a été publié",
+				author: "Qui l'a écrit",
+				feed: "Le nom du flux",
+				feedUrl: "L'adresse du flux",
+				categories: "Ses catégories, en liste",
+				image: "L'adresse de son image",
+				id: "L'identifiant de l'article dans le flux",
+				today: "La date du jour",
+				now: "La date et l'heure actuelles",
+			},
+			filterDocs: {
+				date: { syntax: "date:\"YYYY-MM-DD\"", desc: "Formater une date (jetons moment.js)" },
+				lower: { syntax: "lower", desc: "minuscules" },
+				upper: { syntax: "upper", desc: "MAJUSCULES" },
+				title: { syntax: "title", desc: "Majuscule À Chaque Mot" },
+				capitalize: { syntax: "capitalize", desc: "Première lettre en majuscule" },
+				trim: { syntax: "trim", desc: "Retirer les espaces aux extrémités" },
+				truncate: { syntax: "truncate:80", desc: "Couper à une longueur, avec …" },
+				replace: { syntax: "replace:\"a\",\"b\"", desc: "Remplacer chaque a par b" },
+				default: { syntax: "default:\"texte\"", desc: "Utiliser ceci si la valeur est vide" },
+				split: { syntax: "split:\",\"", desc: "Transformer un texte en liste" },
+				join: { syntax: "join:\", \"", desc: "Transformer une liste en texte" },
+				first: { syntax: "first", desc: "Le premier élément d'une liste" },
+				last: { syntax: "last", desc: "Le dernier élément d'une liste" },
+				list: { syntax: "list", desc: "Une liste à puces Markdown" },
+				wikilink: { syntax: "wikilink", desc: "Chaque élément en [[lien]]" },
+				link: { syntax: "link:\"libellé\"", desc: "Un lien Markdown vers l'adresse" },
+				blockquote: { syntax: "blockquote", desc: "Citer chaque ligne avec >" },
+				safe_name: { syntax: "safe_name", desc: "Retirer les caractères interdits dans un nom de fichier" },
+			},
+			preview: "Aperçu",
+			previewOf: (name: string) => `Rempli à partir de « ${name} ».`,
+			previewSample: "Rempli à partir d'un exemple inventé.",
+			previewTemplate: (path: string) => `(d'abord le texte de ${path})`,
+			copied: (text: string) => `${text} copié`,
+			sampleEvent: {
+				title: "Lancement du projet",
+				location: "Salle 4",
+				description: "Ordre du jour : objectifs, responsables, premier jalon.",
+				calendar: "Travail",
+			},
+			sampleEntry: {
+				title: "Récap de la semaine n° 42",
+				feed: "Lettre d'exemple",
+				author: "Jeanne Dupont",
+				content: "Cette semaine : trois choses à lire, et une à laisser de côté.",
+			},
+		},
 		rss: {
 			feeds: "Flux",
 			namePlaceholder: "Nom (facultatif)",
@@ -2956,6 +3073,23 @@ export const fr: Translations = {
 			showExcerptDesc: "Afficher un court extrait sous chaque élément.",
 			showDate: "Afficher la date",
 			showDateDesc: "Afficher l'heure de publication de chaque élément.",
+			reading: "Lecture",
+			openIn: "Ouvrir les articles dans",
+			openInDesc: "Où mène un clic sur un article. Un article sans page web — une lettre d'information, par exemple — s'ouvre toujours dans le lecteur de Hearth.",
+			openInBrowser: "Navigateur",
+			openInDialog: "Lecteur (fenêtre)",
+			openInTab: "Lecteur (onglet)",
+			readerImages: "Images dans le lecteur",
+			readerImagesDesc: "Une image est chargée depuis le serveur de l'expéditeur, qui apprend ainsi que vous avez ouvert l'article — les lettres d'information comptent là-dessus. « Demander » affiche un bouton pour les charger.",
+			imagesAsk: "Demander",
+			imagesAlways: "Toujours charger",
+			imagesNever: "Ne jamais charger",
+			unreadOnly: "Non lus seulement",
+			unreadOnlyDesc: "N'afficher que les articles pas encore ouverts. Le bouton filtre de la carte le bascule aussi.",
+			noteHeading: "Enregistrer en note",
+			noteDesc: "Ce que « Enregistrer en note » fait d'un article dans le lecteur — un modèle comme celui de l'Obsidian Web Clipper : chaque champ accepte des {{variables}}, et les filtres les façonnent.",
+			noteEnabled: "Proposer « Enregistrer en note »",
+			noteEnabledDesc: "Afficher l'action dans le lecteur et dans le menu d'un article.",
 		},
 		market: {
 			symbols: "Symboles",
@@ -3371,6 +3505,7 @@ export const fr: Translations = {
 			renderFailed: "Cette carte n'a pas pu être affichée — voir la console pour les détails",
 			leafPickView: "Choisissez une vue de plugin dans les paramètres de la carte",
 			boardPickView: "Choisissez une vue pour ce tableau dans ses paramètres",
+			boardPickCard: "Ce tableau n'a pas encore de carte — ajoutez-en une",
 			boardNeedsFile: "Choisissez un fichier pour ce tableau dans ses paramètres",
 			leafViewMissing:
 				"Cette vue n'est pas disponible — activez le plugin qui la fournit",
@@ -3400,6 +3535,15 @@ export const fr: Translations = {
 			missing: "Ce dossier n'est plus dans le coffre.",
 			up: (name: string) => `Remonter à ${name}`,
 			vaultRoot: "la racine du coffre",
+			/** The browser's own controls, beside the breadcrumb. */
+			showList: "Afficher en liste",
+			showTiles: "Afficher en tuiles",
+			openInTab: "Ouvrir dans un nouvel onglet",
+			/** Folding a subfolder's section in the browser, one or all of them. */
+			collapse: (name: string) => `Replier ${name}`,
+			expand: (name: string) => `Déplier ${name}`,
+			collapseAll: "Replier tous les dossiers",
+			expandAll: "Déplier tous les dossiers",
 		},
 		operon: {
 			loading: "Lecture d'Operon…",
@@ -3495,6 +3639,38 @@ export const fr: Translations = {
 			error: "Impossible de charger ce flux",
 			disabled: "Les flux sont désactivés (appels externes désactivés)",
 			refresh: "Actualiser",
+			nothingToOpen: "Cet article n’a ni lien ni texte à ouvrir.",
+			allFeeds: "Tous les flux",
+			allRead: "Tout est lu",
+			unreadOnly: "Afficher les non lus seulement",
+			showAll: "Afficher tous les articles",
+			markAllRead: "Tout marquer comme lu",
+			markRead: "Marquer comme lu",
+			markUnread: "Marquer comme non lu",
+			readHere: "Lire dans Hearth",
+			openTab: "Lire dans un nouvel onglet",
+			openBrowser: "Ouvrir dans le navigateur",
+			saveNote: "Enregistrer en note",
+			openNote: "Ouvrir la note enregistrée",
+			copyLink: "Copier le lien",
+			linkCopied: "Lien copié",
+			reader: {
+				title: "Lecteur",
+				gone: "Cette carte de flux n'existe plus.",
+				noItems: "Rien à lire ici.",
+				toggleList: "Afficher ou masquer la liste",
+				prevFeed: "Flux précédent",
+				nextFeed: "Flux suivant",
+				popOut: "Ouvrir dans un onglet",
+				prev: "Précédent",
+				next: "Suivant",
+				position: (at: number, of: number) => `${at} sur ${of}`,
+				keys: "← → articles · [ ] flux · o ouvrir · s enregistrer · u non lu · i images · l liste",
+				imagesBlocked: (n: number) => (n === 1 ? "1 image non chargée." : `${n} images non chargées.`),
+				loadImages: "Charger les images",
+				noteSaved: (path: string) => `Enregistré sous ${path}`,
+				noteFailed: "Impossible de créer la note.",
+			},
 		},
 		market: {
 			types: {
@@ -4694,8 +4870,8 @@ export const fr: Translations = {
 			gitFoot: "entrée ouvre · espace indexe · suppr annule · r relit",
 			rssOpen: "Ouvrir dans le navigateur",
 			copyLink: "Copier le lien",
-			rssFoot: "entrée ouvre dans le navigateur · r actualise",
-			rssFootTabs: "entrée ouvre dans le navigateur · ←/→ source · r actualise",
+			rssFoot: "entrée ouvre · u lu/non lu · A tout lu · f non lus · r actualiser",
+			rssFootTabs: "entrée ouvre · ←/→ source · u lu/non lu · A tout lu · f non lus · r actualiser",
 			jiraKey: "CLÉ",
 			jiraType: "TYPE",
 			jiraPriority: "PRIORITÉ",

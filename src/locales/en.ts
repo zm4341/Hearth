@@ -613,6 +613,7 @@ export const en = {
 			tabs: {
 				general: "General",
 				plugin: "Plugin view",
+				single: "Card",
 				header: "Header",
 				layout: "Layout",
 				style: "Style",
@@ -621,13 +622,20 @@ export const en = {
 			name: "Name",
 			mode: "Dashboard type",
 			modeDesc:
-				"A board of Hearth cards, or the whole board given over to one plugin's view. Switching to a plugin view keeps this board's cards — switch back and they return.",
+				"A board of Hearth cards, a single Hearth card filling the whole board, or the whole board given over to one plugin's view. Switching type keeps this board's cards — switch back and they return.",
 			modeOptions: {
 				cards: "Cards",
+				single: "Single card",
 				plugin: "Plugin view",
 			},
 			modePickViewHint:
 				"This board has no view yet — choose one on the Plugin view tab.",
+			modePickCardHint: "This board has no card yet — add one on the Card tab.",
+			singleCard: "Card",
+			singleCardDesc:
+				"Which of this board's cards fills it. The others stay on the board and come back if it is switched back to cards.",
+			singleCardEdit: "Edit card",
+			singleCardAdd: "Add a new card",
 			pluginViewType: "View",
 			pluginViewTypeDesc:
 				"Which registered view fills this board. The list is every view the app has right now, so it follows which plugins are enabled.",
@@ -738,6 +746,8 @@ export const en = {
 				"Hearth's wallpaper on this board: classic hills, or flat Material 3 Expressive shapes in your accent colour.",
 			visibilityDefaultPlugin: (state: string) =>
 				`Default on a plugin board (${state})`,
+			visibilityDefaultSingle: (state: string) =>
+				`Default on a single-card board (${state})`,
 			visibilityShown: "shown",
 			visibilityHidden: "hidden",
 			visibilityShow: "Show title",
@@ -775,6 +785,8 @@ export const en = {
 			fitOptionScroll: "Allow scrolling",
 			fitToPagePluginNote:
 				"A plugin board always fits the pane — the hosted view fills it and scrolls itself.",
+			fitToPageSingleNote:
+				"A single-card board always fits the pane — the card fills it and scrolls itself.",
 			themeColorTarget: "Accent colour on the title",
 			themeColorTargetDesc:
 				"Which parts of this board's brand mark follow the theme's icon colour. Overrides the global setting for this board; Hearth's tab and ribbon icons keep following the global one.",
@@ -1434,6 +1446,13 @@ export const en = {
 						"The same for Iconize (formerly Obsidian Icon Folder), including icons " +
 						"set through a frontmatter property.",
 				},
+				frontMatterTitle: {
+					name: "Front Matter Title",
+					desc:
+						"Folder cards and the folder browser list notes by the titles Front " +
+						"Matter Title shows for them in the file explorer, instead of their " +
+						"file names.",
+				},
 				vaultPet: {
 					name: "Vault Pet",
 					desc:
@@ -1590,6 +1609,21 @@ export const en = {
 				"Property Iconize stores a note's icon in, for icons set through " +
 				"frontmatter rather than its menu. Match this to Iconize's own " +
 				"setting if you renamed it (its default is “icon”).",
+		},
+		frontMatterTitle: {
+			heading: "Front Matter Title",
+			headingDesc:
+				"Show notes the way the file explorer does when the Front Matter Title " +
+				"plugin gives them a title: folder cards and the folder browser list " +
+				"each note by that title instead of its file name. Follows the " +
+				"plugin's own explorer setting — while its explorer feature is off, " +
+				"file names are shown.",
+			enable: "Use titles from Front Matter Title",
+			enableDesc: "Off lists every note by its file name, ignoring the plugin.",
+			enableDescNoPlugin:
+				"Front Matter Title isn't enabled right now, so notes are listed by " +
+				"their file names. This can stay on — it takes effect as soon as the " +
+				"plugin is installed.",
 		},
 		operon: {
 			heading: "Operon",
@@ -2085,6 +2119,25 @@ export const en = {
 				"Clicking the card's empty space — or its folder button — opens the " +
 				"folder in a browser with a breadcrumb, where every folder can be " +
 				"stepped into.",
+			browseIn: "Open the browser",
+			browseInDesc:
+				"In a dialog over the board — with a button that moves it to a tab — " +
+				"or straight in a tab of its own, where the folder has the whole page.",
+			browseInModal: "In a dialog",
+			browseInTab: "In a new tab",
+			browserView: "Browser layout",
+			browserViewDesc:
+				"How the browser shows the folder, separately from the card: a list " +
+				"of rows, or larger tiles with a preview of each note.",
+			preview: "Note previews",
+			previewDesc: "Show the first lines of each note's text on its tile, without its properties.",
+			previewSize: "Preview text size",
+			previewSizeDesc: "In pixels. Small by default — enough to recognise a note by.",
+			images: "Image previews",
+			imagesDesc:
+				"Pictures show themselves on their tiles, and a note shows its first " +
+				"embedded image as a cover. Only on the Full performance tier: a " +
+				"picture is the whole file decoded, which a lighter tier is there to avoid.",
 		},
 		calendar: {
 			view: "Layout",
@@ -2119,45 +2172,9 @@ export const en = {
 			refreshDesc: "How often to re-fetch calendars, in minutes. 0 fetches only on open.",
 			eventNoteHeading: "Event notes",
 			eventNoteDesc:
-				"Configure the “Create note” action in the event popup: pick a template, choose a folder and filename, and decide what happens to each event value.",
+				"The note “Create note” in the event popup makes. It works like an Obsidian Web Clipper template: a name, a folder, typed properties and a body, each taking {{variables}} and filters.",
 			eventNoteEnabled: "Show “Create note”",
 			eventNoteEnabledDesc: "Offer a create-note button in the event details popup.",
-			eventNoteFolder: "Folder",
-			eventNoteFolderDesc: "Where new event notes are created. Empty = vault root.",
-			eventNoteFilename: "Filename",
-			eventNoteFilenameDesc: "Note name. Placeholders: {{summary}}, {{date}}, {{start}}, {{location}}, …",
-			eventNoteTemplate: "Template",
-			eventNoteTemplateDesc:
-				"Optional note whose contents seed the body. The same {{…}} placeholders are substituted.",
-			eventNotePickTemplate: "Pick template file",
-			eventNoteClearTemplate: "Clear template",
-			eventNoteLinkKey: "Link property",
-			eventNoteLinkKeyDesc:
-				"Frontmatter property that stores the event’s ID, so an event always maps to one note. Empty to disable linking.",
-			eventNoteCustomize: "Customise field routing",
-			eventNoteCustomizeDesc:
-				"Off uses sensible defaults (date & time as properties, description in the body). On lets you route each value.",
-			eventNoteFieldsHeading: "Field routing",
-			eventNoteAddField: "Add field",
-			eventNoteRemoveField: "Remove",
-			eventFieldNames: {
-				summary: "Name",
-				date: "Date",
-				start: "Start time",
-				end: "End time",
-				location: "Location",
-				description: "Description",
-				url: "URL",
-				calendar: "Calendar",
-			},
-			eventFieldActions: {
-				ignore: "Ignore",
-				frontmatter: "Property",
-				body: "Append to body",
-			},
-			eventNotePropertyPlaceholder: "Property name",
-			eventNoteHeadingPlaceholder: "Heading (optional)",
-			eventNoteFormatPlaceholder: "Format (e.g. HH:mm)",
 			chipsHeading: "Entry details",
 			chipsDesc:
 				"Choose what each agenda entry shows beside its title. Turn off what you don't need — on a narrow card the markers compete with the title itself.",
@@ -2973,6 +2990,105 @@ export const en = {
 			showFile: "Show note name",
 			noOptions: "Add an Operon card to the board first to load these options",
 		},
+		clip: {
+			name: "Note name",
+			nameDesc: "The new note's name. Every field here takes {{variables}}.",
+			folder: "Folder",
+			folderDesc: "Where new notes go. Variables work here too, e.g. Clippings/{{feed}}. Empty = vault root.",
+			folderPlaceholder: "Vault root",
+			pickFolder: "Pick folder",
+			properties: "Properties",
+			propertiesDesc: "Each value is a template. A property that comes out empty is left out of the note.",
+			propertyName: "Name",
+			propertyValue: "Value, e.g. {{title}}",
+			addProperty: "Add property",
+			removeProperty: "Remove property",
+			resetProperties: "Back to the default properties",
+			types: {
+				text: "Text",
+				list: "List",
+				number: "Number",
+				checkbox: "Checkbox",
+				date: "Date",
+				datetime: "Date & time",
+			},
+			body: "Note content",
+			bodyDesc: "The body of the note.",
+			resetBody: "Back to the default content",
+			template: "Template note",
+			templateDesc: "Optional. Its text opens the body, with the same variables filled in.",
+			pickTemplate: "Pick template note",
+			clearTemplate: "Clear template",
+			linkKey: "Link property",
+			linkKeyDesc:
+				"Remembers what the note was made from, so the same item opens its note instead of making another. Empty: always make a new note.",
+			variables: "Variables",
+			variablesHint: "Click one to put it where the cursor is.",
+			filters: "Filters",
+			filtersHint:
+				"Chain filters after a variable with |, e.g. {{published|date:\"D MMMM YYYY\"}} or {{title|lower|truncate:40}}.",
+			vars: {
+				title: "The title",
+				date: "The day it takes place",
+				start: "When it starts",
+				end: "When it ends",
+				location: "Where it takes place",
+				description: "Its description",
+				url: "Its link",
+				calendar: "The calendar's name",
+				uid: "The event's ID",
+				link: "The entry's web address",
+				content: "The full text, as Markdown",
+				html: "The full text as the feed sent it (HTML)",
+				excerpt: "A short plain-text summary",
+				published: "When it was published",
+				author: "Who wrote it",
+				feed: "The feed's name",
+				feedUrl: "The feed's address",
+				categories: "Its categories, as a list",
+				image: "Its picture's address",
+				id: "The entry's ID in the feed",
+				today: "Today's date",
+				now: "The date and time now",
+			},
+			filterDocs: {
+				date: { syntax: "date:\"YYYY-MM-DD\"", desc: "Format a date (moment.js tokens)" },
+				lower: { syntax: "lower", desc: "lower case" },
+				upper: { syntax: "upper", desc: "UPPER CASE" },
+				title: { syntax: "title", desc: "Title Case" },
+				capitalize: { syntax: "capitalize", desc: "Capital first letter" },
+				trim: { syntax: "trim", desc: "Drop spaces at both ends" },
+				truncate: { syntax: "truncate:80", desc: "Cut to a length, with …" },
+				replace: { syntax: "replace:\"a\",\"b\"", desc: "Replace every a with b" },
+				default: { syntax: "default:\"text\"", desc: "Use this when the value is empty" },
+				split: { syntax: "split:\",\"", desc: "Turn text into a list" },
+				join: { syntax: "join:\", \"", desc: "Turn a list into text" },
+				first: { syntax: "first", desc: "A list's first item" },
+				last: { syntax: "last", desc: "A list's last item" },
+				list: { syntax: "list", desc: "A Markdown bullet list" },
+				wikilink: { syntax: "wikilink", desc: "[[Link]] each item" },
+				link: { syntax: "link:\"label\"", desc: "A Markdown link to the address" },
+				blockquote: { syntax: "blockquote", desc: "Quote every line with >" },
+				safe_name: { syntax: "safe_name", desc: "Drop characters a file name can't hold" },
+			},
+			preview: "Preview",
+			previewOf: (name: string) => `Filled from “${name}”.`,
+			previewSample: "Filled from a made-up example.",
+			previewTemplate: (path: string) => `(text of ${path} first)`,
+			copied: (text: string) => `Copied ${text}`,
+			sampleEvent: {
+				title: "Project kick-off",
+				location: "Room 4",
+				description: "Agenda: goals, owners, first milestone.",
+				calendar: "Work",
+			},
+			sampleEntry: {
+				title: "Weekly digest #42",
+				feed: "Example newsletter",
+				author: "Jane Doe",
+				content: "This week: three things worth reading, and one worth skipping.",
+			},
+		},
 		rss: {
 			feeds: "Feeds",
 			namePlaceholder: "Name (optional)",
@@ -3009,6 +3125,26 @@ export const en = {
 			showExcerptDesc: "Show a short text snippet under each item.",
 			showDate: "Show date",
 			showDateDesc: "Show each item's publish time.",
+			reading: "Reading",
+			openIn: "Open entries in",
+			openInDesc:
+				"Where a click on an entry takes you. An entry without a web page — a newsletter, say — always opens in Hearth's reader.",
+			openInBrowser: "Browser",
+			openInDialog: "Reader (dialog)",
+			openInTab: "Reader (tab)",
+			readerImages: "Pictures in the reader",
+			readerImagesDesc:
+				"A picture is fetched from the sender's server, which tells it you opened the entry — newsletters count on it. Ask shows a button to load them.",
+			imagesAsk: "Ask",
+			imagesAlways: "Always load",
+			imagesNever: "Never load",
+			unreadOnly: "Unread only",
+			unreadOnlyDesc: "List only the entries you haven't opened. The filter button on the card switches it too.",
+			noteHeading: "Save as note",
+			noteDesc:
+				"What “Save as note” in the reader makes of an entry — a template like the Obsidian Web Clipper's: every field takes {{variables}}, and filters shape them.",
+			noteEnabled: "Offer “Save as note”",
+			noteEnabledDesc: "Show the action in the reader and in an entry's menu.",
 		},
 		market: {
 			symbols: "Symbols",
@@ -3424,6 +3560,7 @@ export const en = {
 			renderFailed: "This card couldn't be drawn — see the console for details",
 			leafPickView: "Pick a plugin view in card settings",
 			boardPickView: "Pick a view for this board in dashboard settings",
+			boardPickCard: "This board has no card yet — add one to fill it",
 			boardNeedsFile: "Pick a file for this board in dashboard settings",
 			leafViewMissing:
 				"This view isn't available — enable the plugin that provides it",
@@ -3455,6 +3592,15 @@ export const en = {
 			/** The path row's back arrow, and the vault's own name in it. */
 			up: (name: string) => `Up to ${name}`,
 			vaultRoot: "the vault root",
+			/** The browser's own controls, beside the breadcrumb. */
+			showList: "Show as a list",
+			showTiles: "Show as tiles",
+			openInTab: "Open in a new tab",
+			/** Folding a subfolder's section in the browser, one or all of them. */
+			collapse: (name: string) => `Fold ${name}`,
+			expand: (name: string) => `Unfold ${name}`,
+			collapseAll: "Fold all folders",
+			expandAll: "Unfold all folders",
 		},
 		operon: {
 			loading: "Reading Operon…",
@@ -3555,6 +3701,38 @@ export const en = {
 			error: "Couldn't load this feed",
 			disabled: "Feeds are off (external calls disabled)",
 			refresh: "Refresh",
+			nothingToOpen: "This entry has no link or text to open.",
+			allFeeds: "All feeds",
+			allRead: "All caught up",
+			unreadOnly: "Show unread only",
+			showAll: "Show all entries",
+			markAllRead: "Mark all as read",
+			markRead: "Mark as read",
+			markUnread: "Mark as unread",
+			readHere: "Read in Hearth",
+			openTab: "Read in a new tab",
+			openBrowser: "Open in browser",
+			saveNote: "Save as note",
+			openNote: "Open saved note",
+			copyLink: "Copy link",
+			linkCopied: "Link copied",
+			reader: {
+				title: "Reader",
+				gone: "This feed card no longer exists.",
+				noItems: "Nothing to read here.",
+				toggleList: "Show or hide the list",
+				prevFeed: "Previous feed",
+				nextFeed: "Next feed",
+				popOut: "Open in a tab",
+				prev: "Previous",
+				next: "Next",
+				position: (at: number, of: number) => `${at} of ${of}`,
+				keys: "← → entries · [ ] feeds · o open · s save · u unread · i pictures · l list",
+				imagesBlocked: (n: number) => (n === 1 ? "1 picture not loaded." : `${n} pictures not loaded.`),
+				loadImages: "Load pictures",
+				noteSaved: (path: string) => `Saved as ${path}`,
+				noteFailed: "Couldn't create the note.",
+			},
 		},
 		market: {
 			types: {
@@ -4806,8 +4984,8 @@ export const en = {
 			gitFoot: "enter opens · space stages · del discards · r re-reads",
 			rssOpen: "Open in browser",
 			copyLink: "Copy link",
-			rssFoot: "enter opens in the browser · r refresh",
-			rssFootTabs: "enter opens in the browser · ←/→ source · r refresh",
+			rssFoot: "enter opens · u read/unread · A all read · f unread only · r refresh",
+			rssFootTabs: "enter opens · ←/→ source · u read/unread · A all read · f unread only · r refresh",
 			jiraKey: "KEY",
 			jiraType: "TYPE",
 			jiraPriority: "PRIORITY",

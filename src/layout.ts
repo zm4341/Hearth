@@ -96,6 +96,8 @@ import {
 } from "./slideshow";
 import { DATACORE_LANGUAGES, type DatacoreLanguage } from "./datacore";
 import { asFolderSort } from "./foldercontents";
+import { previewSize } from "./notepreview";
+import { CLIP_PROPERTY_TYPES, type ClipProperty, type ClipPropertyType, type ClipTemplate } from "./clip";
 import {
 	type EventField,
 	type EventFieldAction,
@@ -307,6 +309,9 @@ export function exportSettingsPayload(s: HomeSettings): Record<string, unknown> 
 		// File icons (Iconic / Iconize)
 		customFileIcons: s.customFileIcons,
 		iconizeIconProperty: s.iconizeIconProperty,
+
+		// Front Matter Title
+		frontMatterTitles: s.frontMatterTitles,
 
 		// Operon
 		operonIntegration: s.operonIntegration,
@@ -1007,19 +1012,37 @@ const EVENT_FIELDS: readonly EventField[] = [
 ];
 const EVENT_FIELD_ACTIONS: readonly EventFieldAction[] = ["ignore", "frontmatter", "body"];
 
+/** A note template (src/clip.ts): every field optional, properties kept
+ * only when they have a name or a value and a known type. */
+function sanitizeClipTemplate(raw: unknown): ClipTemplate | undefined {
+	if (!raw || typeof raw !== "object") return undefined;
+	const r = raw as Record<string, unknown>;
+	const cfg: ClipTemplate = {};
+	if (typeof r.enabled === "boolean") cfg.enabled = r.enabled;
+	for (const key of ["folder", "name", "body", "template", "linkKey"] as const) {
+		const value = str(r[key]);
+		if (value !== undefined) cfg[key] = value;
+	}
+	if (Array.isArray(r.properties)) {
+		cfg.properties = r.properties.flatMap((p): ClipProperty[] => {
+			if (!p || typeof p !== "object") return [];
+			const q = p as Record<string, unknown>;
+			const prop: ClipProperty = { name: str(q.name) ?? "", value: str(q.value) ?? "" };
+			if (CLIP_PROPERTY_TYPES.includes(q.type as ClipPropertyType) && q.type !== "text") {
+				prop.type = q.type as ClipPropertyType;
+			}
+			return [prop];
+		});
+	}
+	return cfg;
+}
+
 function sanitizeEventNote(raw: unknown): EventNoteConfig | undefined {
 	if (!raw || typeof raw !== "object") return undefined;
 	const r = raw as Record<string, unknown>;
-	const cfg: EventNoteConfig = {};
-	if (typeof r.enabled === "boolean") cfg.enabled = r.enabled;
-	const folder = str(r.folder);
-	if (folder !== undefined) cfg.folder = folder;
+	const cfg: EventNoteConfig = sanitizeClipTemplate(raw) ?? {};
 	const filename = str(r.filename);
 	if (filename !== undefined) cfg.filename = filename;
-	const template = str(r.template);
-	if (template !== undefined) cfg.template = template;
-	const linkKey = str(r.linkKey);
-	if (linkKey !== undefined) cfg.linkKey = linkKey;
 	if (Array.isArray(r.fields)) {
 		cfg.fields = r.fields
 			.map(sanitizeEventNoteField)
@@ -1460,6 +1483,13 @@ function sanitizeFolder(r: Record<string, unknown>): FolderCardConfig {
 	if (typeof r.counts === "boolean") cfg.counts = r.counts;
 	if (typeof r.browse === "boolean") cfg.browse = r.browse;
 	if (r.navigate === "card") cfg.navigate = "card";
+	if (r.browseIn === "tab") cfg.browseIn = "tab";
+	if (r.browserView === "list" || r.browserView === "tiles") cfg.browserView = r.browserView;
+	if (typeof r.preview === "boolean") cfg.preview = r.preview;
+	if (typeof r.images === "boolean") cfg.images = r.images;
+	if (typeof r.previewSize === "number" && Number.isFinite(r.previewSize)) {
+		cfg.previewSize = previewSize(r.previewSize);
+	}
 	return cfg;
 }
 
@@ -1522,6 +1552,13 @@ function sanitizeRss(r: Record<string, unknown>): RssConfig {
 	if (typeof r.showExcerpt === "boolean") cfg.showExcerpt = r.showExcerpt;
 	if (typeof r.showDate === "boolean") cfg.showDate = r.showDate;
 	if (typeof r.mergeAll === "boolean") cfg.mergeAll = r.mergeAll;
+	if (r.openIn === "browser" || r.openIn === "dialog" || r.openIn === "tab") cfg.openIn = r.openIn;
+	if (r.readerImages === "ask" || r.readerImages === "always" || r.readerImages === "never") {
+		cfg.readerImages = r.readerImages;
+	}
+	if (typeof r.unreadOnly === "boolean") cfg.unreadOnly = r.unreadOnly;
+	const note = sanitizeClipTemplate(r.note);
+	if (note) cfg.note = note;
 	return cfg;
 }
 
@@ -2347,6 +2384,9 @@ export function applySettings(s: HomeSettings, data: Record<string, unknown>): v
 		s.customFileIcons = data.customFileIcons;
 	const iconizeProperty = str(data.iconizeIconProperty)?.trim();
 	if (iconizeProperty) s.iconizeIconProperty = iconizeProperty;
+	// Front Matter Title
+	if (typeof data.frontMatterTitles === "boolean")
+		s.frontMatterTitles = data.frontMatterTitles;
 
 	// Operon
 	if (typeof data.operonIntegration === "boolean") {
