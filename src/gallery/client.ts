@@ -116,13 +116,12 @@ interface Session {
 }
 
 /**
- * The gallery Hearth points at out of the box.
+ * The gallery Hearth points at out of the box: none.
  *
- * A default host means every install talks to it — so the setting stays a
- * setting: clearing the address in settings turns the gallery off entirely, and
- * a vault that has cleared it keeps it cleared across upgrades (see the
- * `galleryUrl` migration in `src/types.ts`, which is the half of this that makes
- * "off" stick).
+ * Empty means the gallery is off — no buttons, no requests. Typing an address
+ * into the setting (a self-hosted gallery, say) is what turns it on, and a
+ * vault that has one keeps it across upgrades (see the `galleryUrl` migration
+ * in `src/types.ts`).
  *
  * Nothing is fetched before somebody opens the gallery. The buttons are drawn
  * because a host is configured; no listing, no thumbnail and no request happens
@@ -132,7 +131,11 @@ interface Session {
  * `src/types.ts` needs both to seed and sanitize the setting, and this module —
  * unlike the barrel — has no path back to the plugin object.
  */
-export const DEFAULT_GALLERY_URL = "https://gallery.o-uhnavy.com";
+export const DEFAULT_GALLERY_URL = "";
+
+/** The host upstream Hearth seeded as its default. Vaults that still hold it are
+ * switched off by the `galleryUrl` migration in `src/types.ts`. */
+export const UPSTREAM_GALLERY_URL = "https://gallery.o-uhnavy.com";
 
 /**
  * Normalise and vet a host.

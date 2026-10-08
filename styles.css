@@ -2989,13 +2989,9 @@ button.hearth-tips-example:hover {
 	display: none;
 }
 
-/* ---- Icon+label buttons and the Ko-fi tip button --------------------
+/* ---- Icon+label buttons ---------------------------------------------
    `hearth-about-btn` is the icon-beside-label button layout the About rows
-   use; it is also worn by the Ko-fi tip button wherever that appears (About,
-   the "What's new" dialog footer, the card picker's request page — see
-   `src/kofi.ts`), so the three can't drift apart. The tip button wears
-   Ko-fi's own red rather than the accent, so it reads as a support button, not
-   one more action of Hearth's. */
+   use. */
 
 .hearth-about-btn {
 	display: inline-flex;
@@ -3010,83 +3006,6 @@ button.hearth-tips-example:hover {
 .hearth-about-btn .svg-icon {
 	width: 15px;
 	height: 15px;
-}
-
-/* A filled pill in Ko-fi's red — deepened from the brand's #ff5e5b just enough
- * for white text to read (4.5:1) — with the cup on a white badge. `button.` to
- * outrank Obsidian's own button rule, which would otherwise repaint it. */
-button.hearth-kofi-btn {
-	gap: 8px;
-	min-height: 34px;
-	padding: 4px 16px 4px 4px;
-	border: none;
-	border-radius: 999px;
-	background-color: #d93a3a;
-	box-shadow: 0 2px 8px rgba(217, 58, 58, 0.35);
-	color: #ffffff;
-	font-weight: 700;
-	letter-spacing: 0.01em;
-	cursor: pointer;
-	transition:
-		background-color 140ms ease,
-		box-shadow 140ms ease,
-		transform 140ms ease;
-}
-
-button.hearth-kofi-btn:hover {
-	background-color: #c42f30;
-	box-shadow: 0 4px 14px rgba(217, 58, 58, 0.45);
-	color: #ffffff;
-	transform: translateY(-1px);
-}
-
-button.hearth-kofi-btn:active {
-	transform: translateY(0) scale(0.97);
-}
-
-button.hearth-kofi-btn:focus-visible {
-	outline: 2px solid #ff5e5b;
-	outline-offset: 2px;
-}
-
-.hearth-kofi-btn .hearth-about-btn-icon {
-	align-items: center;
-	justify-content: center;
-	flex: none;
-	width: 26px;
-	height: 26px;
-	border-radius: 999px;
-	background: #ffffff;
-}
-
-.hearth-kofi-btn .svg-icon {
-	width: 15px;
-	height: 15px;
-	color: #ff5e5b;
-	stroke-width: 2.4px;
-}
-
-/* A little wobble of the cup on hover, for anyone who hasn't asked for less
- * motion. */
-@media (prefers-reduced-motion: no-preference) {
-	button.hearth-kofi-btn:hover .hearth-about-btn-icon .svg-icon {
-		animation: hearth-kofi-wobble 600ms ease-in-out;
-	}
-}
-
-@keyframes hearth-kofi-wobble {
-	0%,
-	100% {
-		transform: rotate(0);
-	}
-
-	25% {
-		transform: rotate(-14deg);
-	}
-
-	60% {
-		transform: rotate(10deg);
-	}
 }
 
 /* Lists (bookmarks) */
@@ -14588,21 +14507,6 @@ body.hearth-dv-resizing {
 	background: var(--background-modifier-border);
 }
 
-.hearth-picker-rail-btn.is-request {
-	color: var(--text-accent);
-}
-
-/* The Ko-fi tip button as the rail's last entry, directly under "Request a
-   card". It keeps the brand's white/red look (see `src/kofi.ts`) rather than
-   the rail's flat transparent rows — it is a link out, not a scope you can
-   switch to — and takes the rail's own metrics so it lines up with them. */
-.hearth-picker-rail-kofi {
-	width: 100%;
-	margin-top: 10px;
-	justify-content: flex-start;
-	font-size: var(--font-ui-small);
-}
-
 .hearth-picker-results {
 	flex: 1 1 auto;
 	min-width: 0;
@@ -14807,58 +14711,6 @@ body.hearth-dv-resizing {
 	height: 28px;
 }
 
-.hearth-picker-foot {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 6px;
-	flex-wrap: wrap;
-	margin-top: 24px;
-	padding-top: 14px;
-	border-top: 1px solid var(--background-modifier-border);
-	font-size: var(--font-ui-smaller);
-	color: var(--text-muted);
-}
-
-.hearth-picker-foot-link {
-	padding: 0;
-	border: none;
-	background: transparent;
-	box-shadow: none;
-	color: var(--text-accent);
-	font-size: inherit;
-	cursor: pointer;
-	text-decoration: underline;
-}
-
-/* ---- Request a card ---- */
-.hearth-picker-request-intro {
-	margin-bottom: 14px;
-	color: var(--text-muted);
-	line-height: 1.45;
-}
-
-.hearth-picker-request-option {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 12px;
-	margin-bottom: 8px;
-	border: 1px solid var(--background-modifier-border);
-	border-radius: 8px;
-}
-
-.hearth-picker-request-icon {
-	display: inline-flex;
-	flex: none;
-	color: var(--text-accent);
-}
-
-.hearth-picker-request-icon .svg-icon {
-	width: 20px;
-	height: 20px;
-}
-
 .hearth-operon-flag.is-active {
 	color: var(--interactive-accent);
 }
@@ -14956,34 +14808,6 @@ body.hearth-dv-resizing {
 	height: 20px;
 }
 
-.hearth-picker-request-text {
-	flex: 1 1 auto;
-	min-width: 0;
-}
-
-.hearth-picker-request-title {
-	font-weight: 600;
-	color: var(--text-normal);
-}
-
-.hearth-picker-request-desc {
-	font-size: var(--font-ui-smaller);
-	color: var(--text-muted);
-	line-height: 1.35;
-	overflow-wrap: anywhere;
-}
-
-.hearth-picker-request-option .mod-cta {
-	flex: none;
-}
-
-.hearth-picker-request-note {
-	margin-top: 12px;
-	font-size: var(--font-ui-smaller);
-	color: var(--text-faint);
-	line-height: 1.4;
-}
-
 /* On a phone the rail becomes a scrolling chip row above the grid: 168px of
    sidebar would leave the tiles nowhere to live. */
 @media (max-width: 620px) {
@@ -15020,32 +14844,8 @@ body.hearth-dv-resizing {
 		display: none;
 	}
 
-	/* One more chip in the scrolling row, at its end: no stretching, no
-	   wrapping, and no top margin now that the rail runs sideways. */
-	.hearth-picker-rail-kofi {
-		flex: none;
-		width: auto;
-		margin-top: 0;
-		border-radius: 999px;
-		white-space: nowrap;
-	}
-
 	.hearth-picker-grid {
 		grid-template-columns: 1fr;
-	}
-
-	/* Grid, not flex-wrap: a wrapping flex line breaks before it shrinks, which
-	   put the icon, the text and the button on three lines of their own. Here
-	   the icon keeps the text beside it and only the button drops. */
-	.hearth-picker-request-option {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		align-items: start;
-		row-gap: 10px;
-	}
-
-	.hearth-picker-request-option .mod-cta {
-		grid-column: 1 / -1;
 	}
 }
 
@@ -17270,23 +17070,6 @@ button:is(.hearth-gallery-rail-btn, .hearth-gallery-rail-publish, .hearth-picker
 	background: var(--background-secondary);
 	color: var(--text-muted);
 	font-size: var(--font-ui-smaller);
-}
-
-.hearth-share-snapshot-report {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	margin-top: 8px;
-	font-size: var(--font-ui-smaller);
-}
-
-.hearth-share-snapshot-report-icon {
-	display: inline-flex;
-}
-
-.hearth-share-snapshot-report-icon .svg-icon {
-	width: 14px;
-	height: 14px;
 }
 
 /* A picture at full size, over whatever opened it. Not an Obsidian modal: it
@@ -22434,7 +22217,6 @@ body.hearth-snapshot-capturing .hearth-view:not(#hearth-boost) {
 .modal.hearth-x-modal button.mod-cta,
 .modal.hearth-x-modal :is(
 		.hearth-weather-detail-refresh,
-		.hearth-share-snapshot-report,
 		.hearth-gallery-retry,
 		.hearth-gallery-update,
 		.hearth-setup-skip,
@@ -22452,7 +22234,6 @@ body.hearth-snapshot-capturing .hearth-view:not(#hearth-boost) {
 .modal.hearth-x-modal button:not(.clickable-icon, [class*="hearth-"]):hover,
 .modal.hearth-x-modal :is(
 		.hearth-weather-detail-refresh,
-		.hearth-share-snapshot-report,
 		.hearth-gallery-retry,
 		.hearth-gallery-update,
 		.hearth-setup-skip,
@@ -23413,14 +23194,14 @@ body.hearth-snapshot-capturing .hearth-view:not(#hearth-boost) {
 }
 
 /* The rail's actions. */
-.hearth-x-modal :is(.hearth-picker-rail-btn.is-gallery, .hearth-picker-rail-btn.is-request, .hearth-gallery-rail-publish) {
+.hearth-x-modal :is(.hearth-picker-rail-btn.is-gallery, .hearth-gallery-rail-publish) {
 	background: var(--x-surface-high);
 	color: var(--x-on-container);
 }
 
-/* One :is() with arguments as specific as the tonal rule's above, so this one,
- * coming later, wins for both. */
-.hearth-x-modal :is(.hearth-picker-rail-btn.is-request, button.hearth-gallery-rail-publish) {
+/* Scoped through the rail so it outranks the tonal rule above (which its
+ * `.is-gallery` argument makes three classes strong). */
+.hearth-x-modal .hearth-gallery-rail button.hearth-gallery-rail-publish {
 	margin-top: 4px;
 	border-radius: 16px;
 	background: var(--x-primary);
@@ -23428,17 +23209,10 @@ body.hearth-snapshot-capturing .hearth-view:not(#hearth-boost) {
 	box-shadow: var(--shadow-s);
 }
 
-.hearth-x-modal :is(.hearth-picker-rail-btn.is-gallery, .hearth-picker-rail-btn.is-request, .hearth-gallery-rail-publish):hover {
+.hearth-x-modal :is(.hearth-picker-rail-btn.is-gallery, .hearth-gallery-rail-publish):hover {
 	border-radius: 999px;
 	background: var(--x-container);
 	color: var(--x-on-container);
-}
-
-.hearth-x-modal .hearth-picker-rail-btn.is-request.is-active {
-	border-radius: 999px;
-	background: var(--x-container);
-	color: var(--x-on-container);
-	box-shadow: none;
 }
 
 .hearth-x-modal :is(.hearth-picker-search-input, .hearth-gallery-search-input) {
@@ -23505,29 +23279,6 @@ body.hearth-snapshot-capturing .hearth-view:not(#hearth-boost) {
 	border-radius: 999px;
 	background: var(--x-surface-highest);
 	color: var(--x-on-container);
-}
-
-.hearth-x-modal .hearth-picker-foot {
-	border-top: none;
-}
-
-.hearth-x-modal .hearth-picker-foot-link {
-	padding: 4px 12px;
-	border-radius: 999px;
-	background: var(--x-surface-high);
-	color: var(--x-on-container);
-	font-weight: 650;
-	text-decoration: none;
-}
-
-.hearth-x-modal .hearth-picker-foot-link:hover {
-	background: var(--x-surface-highest);
-}
-
-.hearth-x-modal .hearth-picker-request-option {
-	border: none;
-	border-radius: 24px;
-	background: var(--x-surface);
 }
 
 /* The gallery's boards: a tonal card with the picture inset in it. */

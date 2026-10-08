@@ -267,24 +267,18 @@ Take a backup first anyway.
 
 ## 8. The default gallery
 
-`DEFAULT_GALLERY_URL` in `src/gallery/client.ts` is
-`https://gallery.o-uhnavy.com`, so that is the gallery every install points at
-until somebody changes it. Three things follow, and they are the reason this
-section exists:
+`DEFAULT_GALLERY_URL` in `src/gallery/client.ts` is empty in this build, so no
+install points at a gallery until somebody types an address into *Settings →
+Hearth → Backup → Gallery address*. A vault still holding the host upstream
+Hearth used to seed (`UPSTREAM_GALLERY_URL`) is switched off when it loads.
 
-- **It is what you are on the hook for.** Uptime, moderation, and the bandwidth
-  of every listing thumbnail every Hearth user loads when they open the gallery.
-  §5 is the part worth re-reading before a release goes out.
 - **Nothing is fetched until somebody opens it.** Configuring a host draws the
   buttons; it does not make a request. A vault that never opens the gallery
   never talks to it.
-- **Off stays off.** Clearing the address in settings turns the gallery off
-  entirely, and `migrateSettings` distinguishes a stored empty string from a key
-  that was never there — so an upgrade re-seeds the default for a vault that has
-  never seen the setting, and leaves a vault that switched it off alone.
+- **A chosen host stays.** `migrateSettings` keeps whatever address a vault
+  stored across upgrades.
 
-Pointing a build at a different gallery — a fork, a private one for a team — is
-that one line, plus the address field for anybody who wants to do it per vault.
+Shipping a build that points at a gallery out of the box is that one constant.
 
 ---
 

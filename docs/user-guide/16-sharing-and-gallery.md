@@ -270,9 +270,7 @@ is not. Publishing waits until you switch on *I've looked — nothing private is
 readable in it*.
 
 If something of yours **is** readable, do not publish the board: the picture
-cannot be taken back once people have installed it. Report it instead — that is a
-bug in the blanking, and it is worth fixing before it happens to somebody else.
-There is a *Report it on GitHub* link right there.
+cannot be taken back once people have installed it.
 
 Screenshots need the desktop application; on mobile, Hearth says so and suggests
 saving the dashboard as a file and publishing it later from a desktop vault.

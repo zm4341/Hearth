@@ -877,16 +877,8 @@ export const zh: Translations = {
 			whatsNewDesc: "查看本版本及历史每个版本的发布说明。",
 			whatsNewButton: "查看更新日志",
 			github: "GitHub 仓库",
-			githubDesc: "浏览源码、为项目点星，或阅读更新日志。",
+			githubDesc: "浏览源码或阅读更新日志。",
 			githubButton: "打开 GitHub",
-			reportIssue: "反馈问题",
-			reportIssueDesc: "遇到 bug 或有功能想法？请在 GitHub 上提交 issue。",
-			reportIssueButton: "反馈问题",
-			kofi: "支持 Hearth",
-			kofiDesc:
-				"Hearth 是免费的，并且永远免费。如果它值得留在您的主屏幕上，" +
-				"欢迎打赏 — 完全自愿，不会锁定任何功能。",
-			kofiButton: "在 Ko-fi 上打赏",
 			version: (v: string) => `版本 ${v}`,
 			versionDesc: "您正在运行的 Hearth 构建版本。",
 		},
@@ -4104,24 +4096,6 @@ export const zh: Translations = {
 			integrations: "集成",
 			fun: "趣味",
 		},
-		request: {
-			railLabel: "申请一种卡片",
-			heading: "申请一种卡片",
-			intro:
-				"缺了什么？请描述您希望 Hearth 拥有的卡片 — 它应该显示什么，" +
-				"数据又从哪里来。",
-			footPrompt: "没找到您想要的？",
-			footLink: "申请一种卡片",
-			githubTitle: "提交 GitHub issue",
-			githubDesc:
-				"公开、可检索，也是讨论这个想法的最佳场所。需要 GitHub 账号。",
-			githubAction: "打开 GitHub",
-			emailTitle: "发送邮件",
-			emailDesc: "如果您不想用 GitHub，可以直接发给维护者。会打开您的邮件应用。",
-			emailAction: "打开邮件",
-			prefilledNote:
-				"两种方式都会预填几个提示问题以及您的 Hearth 和 Obsidian 版本 — 发送前可任意修改。",
-		},
 	},
 
 	// ---- File-type filter labels ---------------------------------------
@@ -4176,8 +4150,7 @@ export const zh: Translations = {
 				"点击图片查看大图，逐处读一遍。卡片标题、标题栏，以及卡片中本就不属于你的内容可以保留；笔记正文、任务、文件名、日程、和你生活有关的数字则不应出现。确认之后才能发布。",
 			snapshotConfirmRequired: "请先看过图片，再打开“我看过了”。",
 			snapshotLeak:
-				"如果图里能读到你的内容，请不要发布这个面板：别人一旦安装，这张图就再也收不回来了。也请告诉我们——这是涂抹功能的缺陷，最好在它落到别人身上之前修好。",
-			snapshotLeakReport: "去 GitHub 反馈",
+				"如果图里能读到你的内容，请不要发布这个面板：别人一旦安装，这张图就再也收不回来了。",
 			snapshotFailed: "Hearth 无法截取面板图片。",
 			snapshotRequired: "画廊条目需要一张面板截图。请先截图——发布前你可以先检查它。",
 			snapshotUnavailable:

@@ -67,7 +67,7 @@ export function parseWikiSummary(json: unknown, lang: string): WikiSummary | nul
 }
 
 /** Wikimedia asks API clients to say who they are. */
-const HEADERS = { "Api-User-Agent": "Hearth (Obsidian plugin; https://github.com/ondreu/Hearth)" };
+const HEADERS = { "Api-User-Agent": "Hearth (Obsidian plugin; https://github.com/zm4341/Hearth)" };
 
 const cache = new Map<string, WikiSummary | null>();
 const CACHE_MAX = 50;

@@ -6,7 +6,6 @@ import { classicCardsInUse } from "./cards";
 import { hasFileIconPlugin } from "./fileicons";
 import { hasFrontMatterTitle } from "./frontmattertitle";
 import { FILE_TYPE_GROUPS, fileTypeLabel } from "./filetypes";
-import { kofiTipButton } from "./kofi";
 import { addIconPicker } from "./lucide";
 import { CommandPickerModal, FilePickerModal, FolderPickerModal } from "./pickers";
 import { addTitleIconPicker } from "./titleicon";
@@ -95,10 +94,8 @@ function tierLabels(): Record<PerformanceTier, string> {
 	};
 }
 
-/** The GitHub links surfaced in the About tab. (The Ko-fi URL lives in
- * `kofi.ts` — the tip button is shown in three places now.) */
-const GITHUB_URL = "https://github.com/ondreu/hearth";
-const GITHUB_ISSUES_URL = "https://github.com/ondreu/hearth/issues/new";
+/** The repository linked from the About tab. */
+const GITHUB_URL = "https://github.com/zm4341/Hearth";
 
 /** Download filenames for the JSON exports. */
 
@@ -2496,11 +2493,11 @@ export class HomeSettingTab extends PluginSettingTab {
 	 * far end of the same pipe — a package that goes somewhere instead of into a
 	 * file — and the identity row it depends on is already here.
 	 *
-	 * The address field is the on switch, and it arrives with
-	 * `DEFAULT_GALLERY_URL` in it. Clearing it turns the gallery off — the
+	 * The address field is the on switch, and it arrives empty
+	 * (`DEFAULT_GALLERY_URL`). While it is empty the gallery is off — the
 	 * buttons elsewhere in the plugin are not drawn, nothing is fetched and
-	 * nothing is sent — and that stays cleared across upgrades, which is the
-	 * half of it `migrateSettings` handles.
+	 * nothing is sent. An address typed in survives upgrades, which is the half
+	 * of it `migrateSettings` handles.
 	 */
 	private gallerySection(containerEl: HTMLElement): void {
 		const strings = t().gallery.settings;
@@ -2610,7 +2607,7 @@ export class HomeSettingTab extends PluginSettingTab {
 
 	// ---- About ----------------------------------------------------------
 
-	/** Project links, a low-key Ko-fi tip button, and the running version. */
+	/** Project links and the running version. */
 	private aboutSection(containerEl: HTMLElement): void {
 		const about = t().settings.about;
 
@@ -2648,18 +2645,6 @@ export class HomeSettingTab extends PluginSettingTab {
 				.setName(about.github)
 				.setDesc(about.githubDesc)
 				.addButton((b) => this.linkButton(b, "github", about.githubButton, GITHUB_URL));
-
-			new Setting(body)
-				.setName(about.reportIssue)
-				.setDesc(about.reportIssueDesc)
-				.addButton((b) =>
-					this.linkButton(b, "bug", about.reportIssueButton, GITHUB_ISSUES_URL),
-				);
-
-			new Setting(body)
-				.setName(about.kofi)
-				.setDesc(about.kofiDesc)
-				.addButton((b) => kofiTipButton(b));
 
 			new Setting(body)
 				.setName(about.version(this.plugin.manifest.version))

@@ -28,7 +28,7 @@
  * stranger's dashboard a safe thing to do at all.
  */
 
-import { apiVersion, type App, Notice, Platform, Setting, TFile } from "obsidian";
+import { type App, Notice, Platform, Setting, TFile } from "obsidian";
 import { setIcon } from "./glyphs";
 import { HearthModal } from "./uidesign";
 import type HearthPlugin from "./main";
@@ -52,7 +52,6 @@ import {
 	normalizeGalleryUrl,
 	publishDashboard,
 	type PublishedListing,
-	redactionReportGithubUrl,
 	rememberedListing,
 	rememberGalleryEntry,
 } from "./gallery";
@@ -671,22 +670,6 @@ class ShareDashboardModal extends HearthModal {
 
 		const leak = body.createDiv("hearth-share-snapshot-leak");
 		leak.createDiv({ text: strings.snapshotLeak });
-		// Icon and label as their own elements: `setButtonText` on a button that
-		// already has an icon wipes the icon, and a bare text node beside one is
-		// an anonymous flex item that orders by whatever the theme does.
-		const report = leak.createEl("button", { cls: "hearth-share-snapshot-report" });
-		setIcon(report.createSpan("hearth-share-snapshot-report-icon"), "bug");
-		report.createSpan({ text: strings.snapshotLeakReport });
-		report.addEventListener("click", () => {
-			window.open(
-				redactionReportGithubUrl({
-					hearthVersion: this.plugin.manifest.version,
-					obsidianVersion: apiVersion,
-					platform: Platform.isMobile ? "Mobile" : "Desktop",
-				}),
-				"_blank",
-			);
-		});
 	}
 
 	/** Whether the board being shared is the one rendered behind this dialog. */

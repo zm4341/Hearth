@@ -27,6 +27,7 @@ import {
 	readListing,
 	readProfile,
 	redactedText,
+	UPSTREAM_GALLERY_URL,
 } from "../src/gallery";
 import type { HearthPackage } from "../src/portable";
 import { exportSettingsPayload } from "../src/layout";
@@ -220,6 +221,17 @@ describe("the gallery host a vault ends up with", () => {
 		expect(migrated({})).toBe(DEFAULT_GALLERY_URL);
 	});
 
+	it("switches off a vault still holding upstream's default host", () => {
+		expect(migrated({ galleryUrl: UPSTREAM_GALLERY_URL })).toBe("");
+		expect(migrated({ galleryUrl: `${UPSTREAM_GALLERY_URL}/` })).toBe("");
+	});
+
+	it("flushes that switch-off so data.json stops naming the host", () => {
+		const s = structuredClone(DEFAULT_SETTINGS);
+		expect(migrateSettings(s, { galleryUrl: UPSTREAM_GALLERY_URL })).toBe(true);
+		expect(migrateSettings(structuredClone(DEFAULT_SETTINGS), { galleryUrl: "" })).toBe(false);
+	});
+
 	it("leaves a vault that turned the gallery off turned off", () => {
 		// The one that matters. An empty string is somebody's decision, and
 		// re-seeding the default over it would switch the feature back on at
@@ -242,8 +254,9 @@ describe("the gallery host a vault ends up with", () => {
 		expect(migrated({ galleryUrl: "not a url" })).toBe("");
 	});
 
-	it("ships a default this build would actually talk to", () => {
-		expect(normalizeGalleryUrl(DEFAULT_GALLERY_URL)).toBe(DEFAULT_GALLERY_URL);
+	it("ships with the gallery off", () => {
+		expect(DEFAULT_GALLERY_URL).toBe("");
+		expect(DEFAULT_SETTINGS.galleryUrl).toBe("");
 	});
 });
 

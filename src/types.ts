@@ -1,7 +1,7 @@
 import { Platform } from "obsidian";
 import type { DatacoreLanguage } from "./datacore";
 import { normalizeAuthorKey } from "./identity";
-import { DEFAULT_GALLERY_URL, normalizeGalleryUrl } from "./gallery/client";
+import { DEFAULT_GALLERY_URL, normalizeGalleryUrl, UPSTREAM_GALLERY_URL } from "./gallery/client";
 import { type PublishedEntry, readGalleryEntries } from "./gallery/published";
 import type { ClipTemplate } from "./clip";
 import type { EventNoteConfig } from "./eventnote";
@@ -2783,12 +2783,11 @@ export interface HomeSettings {
 	/**
 	 * The dashboard gallery this vault browses and publishes to.
 	 *
-	 * Seeded with {@link DEFAULT_GALLERY_URL}. **Empty means the gallery is off**
-	 * — no buttons, no requests — and clearing the field is how somebody turns it
-	 * off. That choice has to survive an upgrade, which is why the migration
-	 * below distinguishes a stored empty string from a key that was never there:
-	 * seeding the default over the first is overriding a decision, while seeding
-	 * it over the second is just a new setting arriving with its default.
+	 * Seeded with {@link DEFAULT_GALLERY_URL}, which is empty: this build ships
+	 * with no gallery. **Empty means the gallery is off** — no buttons, no
+	 * requests — and an address typed into the field is how somebody turns it
+	 * on. The migration below keeps a stored host across upgrades, and clears
+	 * the one upstream Hearth used to seed ({@link UPSTREAM_GALLERY_URL}).
 	 *
 	 * `https` only, except a loopback address so a self-hosted gallery can be
 	 * tried from `docker compose up` without a certificate — see
@@ -4031,10 +4030,15 @@ export function migrateSettings(s: HomeSettings, raw: Record<string, unknown>): 
 	// an empty string chose to have no gallery, and re-seeding the default over
 	// that would switch a feature back on that somebody had switched off — every
 	// upgrade, silently.
-	s.galleryUrl =
+	const galleryUrl =
 		typeof raw.galleryUrl === "string"
 			? (normalizeGalleryUrl(raw.galleryUrl) ?? "")
 			: DEFAULT_GALLERY_URL;
+	// This build ships with no gallery. A vault still holding the host upstream
+	// Hearth used to seed is switched off, and the change is flushed, so nothing
+	// keeps talking to a server this build no longer points at.
+	const retiredGallery = galleryUrl === UPSTREAM_GALLERY_URL;
+	s.galleryUrl = retiredGallery ? "" : galleryUrl;
 	// Which entry each published board is, as this vault last learned it. Read
 	// through its own sanitizer: the keys are strings a host chose, and this is
 	// a file people edit and sync clients merge.
@@ -4047,7 +4051,7 @@ export function migrateSettings(s: HomeSettings, raw: Record<string, unknown>): 
 	const migratedTitleIcon = migrateTitleIcon(s, raw);
 	// Drop the obsolete single-board field so it can't shadow the dashboards.
 	delete (s as unknown as { cards?: unknown }).cards;
-	return migratedCommandId || migratedLowPower || migratedTitleIcon;
+	return migratedCommandId || migratedLowPower || migratedTitleIcon || retiredGallery;
 }
 
 /** The pre-2.2 title mark: an emoji/text `logo` beside a Lucide `logoIcon` that

@@ -954,19 +954,8 @@ export const de: Translations = {
 			whatsNewDesc: "Lies die Versionshinweise für diese und alle früheren Versionen.",
 			whatsNewButton: "Änderungsprotokoll ansehen",
 			github: "GitHub-Repository",
-			githubDesc: "Durchsuche den Quellcode, gib dem Projekt einen Stern oder lies das Änderungsprotokoll.",
+			githubDesc: "Durchsuche den Quellcode oder lies das Änderungsprotokoll.",
 			githubButton: "GitHub öffnen",
-			reportIssue: "Ein Problem melden",
-			reportIssueDesc:
-				"Einen Fehler gefunden oder eine Idee für eine Funktion? Öffne ein Issue auf GitHub.",
-			reportIssueButton: "Issue melden",
-			kofi: "Hearth unterstützen",
-			kofiDesc:
-				"Hearth ist kostenlos und bleibt es auch. Wenn es sich einen Platz auf deinem " +
-				"Startbildschirm verdient hat, kannst du ein Trinkgeld da lassen - völlig freiwillig, keine Funktionen sind gesperrt.",
-			/** Wird von jeder Oberfläche verwendet, die die Trinkgeld-Schaltfläche zeigt: diese Zeile, der
-			 * „Neuigkeiten“-Dialog und die Anfrageseite in der Kartenauswahl. */
-			kofiButton: "Trinkgeld auf Ko-fi",
 			version: (v: string) => `Version ${v}`,
 			versionDesc: "Der Hearth-Build, den du verwendest.",
 		},
@@ -4414,24 +4403,6 @@ export const de: Translations = {
 			integrations: "Integrationen",
 			fun: "Spaß",
 		},
-		request: {
-			railLabel: "Karte vorschlagen",
-			heading: "Karte vorschlagen",
-			intro:
-				"Fehlt dir etwas? Beschreibe die Karte, die du dir in Hearth wünschst - was sie " +
-				"zeigen soll und woher ihre Daten kommen.",
-			footPrompt: "Nicht das, was du gesucht hast?",
-			footLink: "Karte vorschlagen",
-			githubTitle: "GitHub-Issue eröffnen",
-			githubDesc:
-				"Öffentlich, durchsuchbar und der beste Ort, um die Idee zu diskutieren. Braucht ein GitHub-Konto.",
-			githubAction: "GitHub öffnen",
-			emailTitle: "E-Mail senden",
-			emailDesc: "Direkt an den Maintainer, wenn du GitHub lieber nicht nutzt. Öffnet dein Mailprogramm.",
-			emailAction: "E-Mail öffnen",
-			prefilledNote:
-				"Beide öffnen vorausgefüllt mit ein paar Fragen und deinen Hearth- und Obsidian-Versionen - bearbeite alles vor dem Senden.",
-		},
 	},
 
 	// ---- Dateityp-Filterlabels ---------------------------------------
@@ -4508,8 +4479,7 @@ export const de: Translations = {
 			 * nicht „trotzdem veröffentlichen“, denn ein Bild, das durch das Schwärzen kam,
 			 * ist ein Fehler, und die nächste Person, der es passiert, schaut nicht hin. */
 			snapshotLeak:
-				"Wenn etwas von dir darin lesbar ist, veröffentliche dieses Board nicht: Das Bild lässt sich nicht zurückholen, sobald es jemand installiert hat. Sag uns stattdessen Bescheid - das ist ein Fehler im Schwärzen, und es lohnt sich, ihn zu beheben, bevor es jemand anderem passiert.",
-			snapshotLeakReport: "Auf GitHub melden",
+				"Wenn etwas von dir darin lesbar ist, veröffentliche dieses Board nicht: Das Bild lässt sich nicht zurückholen, sobald es jemand installiert hat.",
 			snapshotFailed: "Hearth konnte kein Bild des Boards aufnehmen.",
 			snapshotRequired:
 				"Ein Galerieeintrag braucht ein Bild des Boards. Nimm zuerst eines auf - du kannst es dir ansehen, bevor es rausgeht.",

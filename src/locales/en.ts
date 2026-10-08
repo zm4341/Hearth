@@ -943,19 +943,8 @@ export const en = {
 			whatsNewDesc: "Read the release notes for this and every past version.",
 			whatsNewButton: "View changelog",
 			github: "GitHub repository",
-			githubDesc: "Browse the source, star the project, or read the changelog.",
+			githubDesc: "Browse the source or read the changelog.",
 			githubButton: "Open GitHub",
-			reportIssue: "Report an issue",
-			reportIssueDesc:
-				"Hit a bug or have a feature idea? Open an issue on GitHub.",
-			reportIssueButton: "Report issue",
-			kofi: "Support Hearth",
-			kofiDesc:
-				"Hearth is free and always will be. If it's earned a spot on your home " +
-				"screen, you can leave a tip — completely optional, no features are locked.",
-			/** Shared by every surface that shows the tip button: this row, the
-			 * "What's new" dialog and the card picker's request page. */
-			kofiButton: "Tip me on Ko-fi",
 			version: (v: string) => `Version ${v}`,
 			versionDesc: "The Hearth build you're running.",
 		},
@@ -4415,24 +4404,6 @@ export const en = {
 			integrations: "Integrations",
 			fun: "Fun",
 		},
-		request: {
-			railLabel: "Request a card",
-			heading: "Request a card",
-			intro:
-				"Missing something? Describe the card you wish Hearth had — what it " +
-				"should show and where its data would come from.",
-			footPrompt: "Not what you were looking for?",
-			footLink: "Request a card",
-			githubTitle: "Open a GitHub issue",
-			githubDesc:
-				"Public, searchable, and the best place to discuss the idea. Needs a GitHub account.",
-			githubAction: "Open GitHub",
-			emailTitle: "Send an email",
-			emailDesc: "Straight to the maintainer, if you'd rather not use GitHub. Opens your mail app.",
-			emailAction: "Open email",
-			prefilledNote:
-				"Both open pre-filled with a few prompts and your Hearth and Obsidian versions — edit anything before sending.",
-		},
 	},
 
 	// ---- File-type filter labels ---------------------------------------
@@ -4510,8 +4481,7 @@ export const en = {
 			 * not "publish anyway", because a picture that got past the blanking
 			 * is a bug, and the next person it happens to won't be looking. */
 			snapshotLeak:
-				"If something of yours is readable in it, don't publish this board: the picture can't be taken back once people have installed it. Please tell us instead — that's a bug in the blanking, and it's worth fixing before it happens to somebody else.",
-			snapshotLeakReport: "Report it on GitHub",
+				"If something of yours is readable in it, don't publish this board: the picture can't be taken back once people have installed it.",
 			snapshotFailed: "Hearth couldn't take a picture of the board.",
 			snapshotRequired:
 				"A gallery entry needs a picture of the board. Take one first — you can look at it before it goes.",

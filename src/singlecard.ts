@@ -33,7 +33,6 @@ import type { HomeView } from "./view";
  */
 export function addSingleBoardCard(view: HomeView, dash: Dashboard, onAdded?: () => void): void {
 	openCardPicker(view.app, {
-		hearthVersion: view.plugin.manifest.version,
 		onChoose: (template) => {
 			const s = view.plugin.settings;
 			const card = cardFromTemplate(template);

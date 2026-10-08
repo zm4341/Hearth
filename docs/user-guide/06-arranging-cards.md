@@ -52,11 +52,6 @@ Dataview* (or *Needs Git*, *Needs Operon*, and so on) and carries a one-click
 link that opens that plugin in Obsidian's community plugin browser. You can add
 the card anyway: it shows a prompt until the dependency arrives.
 
-At the bottom of the rail is **Request a card**. It opens a pre-filled GitHub
-issue, or a pre-filled email to the maintainer if you would rather not use
-GitHub. Both are pre-filled with a few prompts and with your Hearth and Obsidian
-version numbers, and you can edit anything before sending.
-
 A newly added card is placed automatically, packed left to right into the first
 free slot.
 

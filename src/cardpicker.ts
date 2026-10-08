@@ -1,5 +1,4 @@
 import {
-	apiVersion,
 	Notice,
 	Platform,
 	prepareFuzzySearch,
@@ -17,9 +16,7 @@ import {
 	type CardCategory,
 	type CardTemplateDef,
 } from "./cards";
-import { cardRequestGithubUrl, cardRequestMailtoUrl } from "./cardrequest";
 import { t } from "./i18n";
-import { createKofiTipButton } from "./kofi";
 
 /**
  * The "Add card" picker.
@@ -34,32 +31,27 @@ import { createKofiTipButton } from "./kofi";
  * This replaces it with a modal that shows the catalogue as it is: every card,
  * always, grouped into categories, searchable, each with a one-line
  * description, and the ones whose plugin is missing marked (and offering a jump
- * to Obsidian's plugin browser) rather than hidden. The last rail entry is
- * "Request a card", because the picker is exactly where you notice the card you
- * wanted doesn't exist yet.
+ * to Obsidian's plugin browser) rather than hidden.
  */
 
-/** What the rail can be showing: every card, one category, or the request page.
- * (`CardCategory` values are used verbatim, so the rail is derived from the
- * registry rather than a second hand-kept list.) */
-type PickerScope = "all" | "request" | CardCategory;
+/** What the rail can be showing: every card, or one category. (`CardCategory`
+ * values are used verbatim, so the rail is derived from the registry rather
+ * than a second hand-kept list.) */
+type PickerScope = "all" | CardCategory;
 
 /** localStorage key for the scope the picker reopens on. */
 const SCOPE_KEY = "hearth-card-picker-scope";
 
 export interface CardPickerOptions {
-	/** The running Hearth version, stamped into a card request. */
-	hearthVersion: string;
 	/** Add this template to the dashboard. */
 	onChoose: (template: CardTemplateDef) => void;
 	/**
 	 * Open the dashboard gallery, closing the picker first.
 	 *
-	 * Sits in the rail directly above "Request a card", which is where the two
-	 * of them belong together: both answer "the card I want isn't here", and a
-	 * whole board somebody has already arranged is the more likely of the two to
-	 * be what was actually wanted. Omitted when no gallery is configured, so the
-	 * rail never offers a door to nowhere.
+	 * Sits at the foot of the rail, under the categories: it answers "the card
+	 * I want isn't here" with a whole board somebody has already arranged.
+	 * Omitted when no gallery is configured, so the rail never offers a door to
+	 * nowhere.
 	 */
 	onGallery?: () => void;
 }
@@ -120,7 +112,7 @@ class CardPickerModal extends HearthModal {
 	}
 
 	private isScope(value: string): value is PickerScope {
-		return value === "all" || value === "request" || (CARD_CATEGORIES as string[]).includes(value);
+		return value === "all" || (CARD_CATEGORIES as string[]).includes(value);
 	}
 
 	private setScope(scope: PickerScope): void {
@@ -183,11 +175,10 @@ class CardPickerModal extends HearthModal {
 		for (const category of CARD_CATEGORIES) {
 			this.railButton(rail, category, strings.categories[category], CATEGORY_ICONS[category]);
 		}
-		rail.createDiv("hearth-picker-rail-sep");
-		// Above "Request a card" and below the categories: the catalogue you can
-		// add from, then whole boards other people have arranged, then the way to
-		// ask for what neither has.
+		// Below the categories: the catalogue you can add from, then whole boards
+		// other people have arranged.
 		if (this.opts.onGallery) {
+			rail.createDiv("hearth-picker-rail-sep");
 			const gallery = rail.createEl("button", { cls: "hearth-picker-rail-btn is-gallery" });
 			setIcon(gallery.createSpan("hearth-picker-rail-icon"), "layout-template");
 			gallery.createSpan({
@@ -200,18 +191,11 @@ class CardPickerModal extends HearthModal {
 				this.opts.onGallery?.();
 			});
 		}
-		this.railButton(rail, "request", strings.request.railLabel, "message-square-plus");
-
-		// Straight under "Request a card", and the only entry in the rail that
-		// isn't a scope: someone browsing the whole catalogue is exactly who
-		// might feel like leaving a tip, and nothing here is behind one.
-		createKofiTipButton(rail).addClass("hearth-picker-rail-kofi");
 	}
 
 	private railButton(rail: HTMLElement, scope: PickerScope, label: string, icon: string): void {
 		const btn = rail.createEl("button", { cls: "hearth-picker-rail-btn" });
 		btn.toggleClass("is-active", this.pickerScope === scope);
-		btn.toggleClass("is-request", scope === "request");
 		btn.setAttribute("aria-pressed", String(this.pickerScope === scope));
 		setIcon(btn.createSpan("hearth-picker-rail-icon"), icon);
 		btn.createSpan({ cls: "hearth-picker-rail-label", text: label });
@@ -225,11 +209,6 @@ class CardPickerModal extends HearthModal {
 		if (!results) return;
 		results.empty();
 		this.tiles = [];
-
-		if (this.pickerScope === "request") {
-			this.renderRequest(results);
-			return;
-		}
 
 		const matches = this.matchingTemplates();
 		if (!matches.length) {
@@ -253,22 +232,12 @@ class CardPickerModal extends HearthModal {
 				this.renderGrid(results, inCategory);
 			}
 		}
-
-		// A quiet way out at the end of the list, for the case the picker can't
-		// answer: you scrolled everything and none of it was the card you wanted.
-		const foot = results.createDiv("hearth-picker-foot");
-		foot.createSpan({ text: t().cardPicker.request.footPrompt });
-		const link = foot.createEl("button", {
-			cls: "hearth-picker-foot-link",
-			text: t().cardPicker.request.footLink,
-		});
-		link.addEventListener("click", () => this.setScope("request"));
 	}
 
 	/** The templates to show, filtered by scope and ranked by the query. */
 	private matchingTemplates(): CardTemplateDef[] {
 		const scoped =
-			this.pickerScope === "all" || this.pickerScope === "request"
+			this.pickerScope === "all"
 				? CARD_TEMPLATES
 				: CARD_TEMPLATES.filter((tpl) => templateCategory(tpl.id) === this.pickerScope);
 		if (!this.query) return scoped;
@@ -365,63 +334,6 @@ class CardPickerModal extends HearthModal {
 		const empty = containerEl.createDiv("hearth-picker-empty");
 		setIcon(empty.createSpan("hearth-picker-empty-icon"), "search-x");
 		empty.createDiv({ cls: "hearth-picker-empty-text", text: t().cardPicker.noMatches });
-		const btn = empty.createEl("button", {
-			cls: "mod-cta",
-			text: t().cardPicker.request.railLabel,
-		});
-		btn.addEventListener("click", () => this.setScope("request"));
-	}
-
-	// ---- Request a card -------------------------------------------------
-
-	private renderRequest(containerEl: HTMLElement): void {
-		const strings = t().cardPicker.request;
-		const page = containerEl.createDiv("hearth-picker-request");
-		page.createDiv({ cls: "hearth-picker-section", text: strings.heading });
-		page.createDiv({ cls: "hearth-picker-request-intro", text: strings.intro });
-
-		const context = {
-			hearthVersion: this.opts.hearthVersion,
-			obsidianVersion: apiVersion,
-			platform: Platform.isMobile ? "Mobile" : "Desktop",
-		};
-
-		this.requestOption(page, {
-			icon: "github",
-			title: strings.githubTitle,
-			description: strings.githubDesc,
-			action: strings.githubAction,
-			url: cardRequestGithubUrl(context),
-		});
-		this.requestOption(page, {
-			icon: "mail",
-			title: strings.emailTitle,
-			// The address itself is never printed on screen — it only ever exists
-			// inside the mailto: the button opens.
-			description: strings.emailDesc,
-			action: strings.emailAction,
-			url: cardRequestMailtoUrl(context),
-		});
-
-		page.createDiv({ cls: "hearth-picker-request-note", text: strings.prefilledNote });
-	}
-
-	private requestOption(
-		containerEl: HTMLElement,
-		opts: { icon: string; title: string; description: string; action: string; url: string },
-	): void {
-		const row = containerEl.createDiv("hearth-picker-request-option");
-		setIcon(row.createSpan("hearth-picker-request-icon"), opts.icon);
-		const text = row.createDiv("hearth-picker-request-text");
-		text.createDiv({ cls: "hearth-picker-request-title", text: opts.title });
-		text.createDiv({ cls: "hearth-picker-request-desc", text: opts.description });
-		const btn = row.createEl("button", { cls: "mod-cta", text: opts.action });
-		btn.addEventListener("click", () => {
-			// mailto: and https: both go through the OS handler — the browser (or
-			// Electron) picks the mail client, which is the only portable way to
-			// open a composer from a plugin.
-			window.open(opts.url, "_blank");
-		});
 	}
 }
 

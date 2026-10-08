@@ -363,8 +363,7 @@ silences all of them at once. See [chapter 17](17-privacy-and-network.md).
 
 ### Is Hearth free?
 
-Yes, and MIT-licensed. There is an optional Ko-fi tip link in *Settings → Hearth
-→ About*; no features are locked behind it.
+Yes, and MIT-licensed.
 
 ### Was Hearth written by AI?
 
@@ -383,22 +382,7 @@ own dashboards. You can move a board between vaults with *Export dashboard* and
 Yes, and translations are explicitly one of the most valuable contributions
 right now. User-facing strings live in `src/locales/`; English (`en.ts`) is the
 source of truth. Copy it, translate the values and register the file — see
-`src/locales/README.md` and [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
-
-### The card I want does not exist
-
-Press **Arrange → Add card**, and use **Request a card** at the bottom of the
-left rail. It opens either a pre-filled GitHub issue or a pre-filled email,
-carrying a few prompts and your Hearth and Obsidian versions. You can edit
-anything before sending.
-
-### How do I report a bug?
-
-**Settings → Hearth → About → Report an issue** opens the GitHub issue tracker.
-Bug reports and feature ideas are the most valuable contributions to Hearth right
-now. For anything larger than a small, obvious fix, open an issue before writing
-code — Hearth moves fast and big pull requests against a fast-moving codebase
-tend to go stale.
+`src/locales/README.md`.
 
 ### Where are the release notes?
 

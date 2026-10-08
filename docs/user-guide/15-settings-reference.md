@@ -361,9 +361,7 @@ Export, import and the gallery are documented in
 | --- | --- |
 | *Set up Hearth* / *Build a dashboard* | Runs the setup wizard. It is always added as a new board, so your existing dashboards are never touched |
 | *What's new* | Read the release notes for this and every past version |
-| *GitHub repository* | Browse the source, star the project, or read the changelog |
-| *Report an issue* | Open an issue on GitHub |
-| *Support Hearth* | A Ko-fi tip link. Completely optional; no features are locked |
+| *GitHub repository* | Browse the source or read the changelog |
 | *Version* | The Hearth build you are running |
 
 ---

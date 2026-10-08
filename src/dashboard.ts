@@ -712,7 +712,6 @@ export function openCardSettings(view: HomeView, card: DashboardCard): void {
  * gallery entry is offered only where the caller has room for it. */
 export function openAddCard(view: HomeView, withGallery: boolean, onAdded?: (card: DashboardCard) => void): void {
 	openCardPicker(view.app, {
-		hearthVersion: view.plugin.manifest.version,
 		onGallery: withGallery && galleryConfigured(view.plugin) ? () => openGallery(view.plugin) : undefined,
 		onChoose: (template) => {
 			const s = view.plugin.settings;

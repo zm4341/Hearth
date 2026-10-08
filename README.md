@@ -51,8 +51,7 @@ of your accent color.
 [Search](#search) · [Cards](#cards) · [Integrations](#integrations) ·
 [Layout](#layout) · [Appearance](#appearance) · [Mobile](#mobile) ·
 [Settings & shortcuts](#settings--shortcuts) · [Privacy & network](#privacy--network) ·
-[Development](#development) ·
-[Contributing](#contributing)
+[Development](#development)
 
 > **Looking for more detail?** The [Hearth User Guide](docs/user-guide/) is a
 > full, chapter-by-chapter manual: every card, every setting, every integration,
@@ -157,8 +156,7 @@ Add cards from the **Arrange** toolbar; configure each one from the card itself
 picker — type to match a card's name or description, or browse by the
 categories below. Cards backed by a community plugin are always listed, marked
 *Needs Dataview* (or Git, Operon…) when the plugin isn't there, with a one-click
-jump to install it. If the card you want doesn't exist, **Request a card** at
-the bottom of the rail opens a pre-filled GitHub issue or email.
+jump to install it.
 
 ### Notes & files
 
@@ -536,10 +534,10 @@ switches all of them off at once.
 | **RSS feed**, **Mini calendar** (ICS/iCal), **Web page** cards | Only the addresses you enter | A plain request for that feed, calendar or page |
 | **Jira filter** card | Only the Jira instance you enter | Your filter or JQL, with the token you enter on the card |
 | **Bookmarks** card, URL bookmarks | `www.google.com/s2/favicons` | The bookmark's domain, to fetch its icon |
-| **Dashboard gallery** (browse, import, publish) | `gallery.o-uhnavy.com`, or the gallery server you set | What you choose to publish; browsing sends only the search |
+| **Dashboard gallery** (browse, import, publish) | The gallery server you set (none by default) | What you choose to publish; browsing sends only the search |
 | A background image or title icon given as a web address | That address | A plain request for the image |
 
-Links in the settings and in *What's new* (GitHub issues, Ko-fi) open in your
+Links in the settings and in *What's new* (GitHub) open in your
 browser only when you click them.
 
 **Your vault.** Search, the statistics and heatmap cards and the tasks cards
@@ -576,24 +574,9 @@ following Obsidian's display language. User-facing strings live in
 [`src/locales/`](src/locales/). English (`en.ts`) is the source of truth; copy
 it, translate the values and register the file. See [`src/locales/README.md`](src/locales/README.md).
 
-## Contributing
-
-Hearth moves fast, so the most valuable contributions right now are **bug
-reports**, **feature ideas** and **translations**. Small, obvious fixes are
-always welcome; for anything larger, please open an issue first — big PRs
-against a fast-moving codebase tend to go stale. See
-[CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Support
-
-Hearth is free and open source. If it's earned a place on your vault's front
-page, you can buy me a coffee — it genuinely helps keep the updates coming.
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B7K822EW68)
-
 ## License
 
-MIT © ondreu · [Changelog](CHANGELOG.md) · [Security](SECURITY.md)
+MIT © ondreu · [Changelog](CHANGELOG.md)
 
 Terminal mode draws with a subset of [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono),
 embedded in `styles.css`: Copyright 2020 The JetBrains Mono Project Authors,

@@ -908,17 +908,8 @@ export const fr: Translations = {
 			whatsNewDesc: "Lire les notes de version de cette version et des précédentes.",
 			whatsNewButton: "Voir le journal des modifications",
 			github: "Dépôt GitHub",
-			githubDesc: "Parcourir le code source, mettre une étoile au projet ou lire le journal des modifications.",
+			githubDesc: "Parcourir le code source ou lire le journal des modifications.",
 			githubButton: "Ouvrir GitHub",
-			reportIssue: "Signaler un problème",
-			reportIssueDesc:
-				"Un bug ou une idée de fonctionnalité ? Ouvrez un ticket sur GitHub.",
-			reportIssueButton: "Signaler",
-			kofi: "Soutenir Hearth",
-			kofiDesc:
-				"Hearth est gratuit et le restera. S'il a gagné sa place sur votre écran " +
-				"d'accueil, vous pouvez laisser un pourboire — totalement facultatif, aucune fonction n'est bloquée.",
-			kofiButton: "Un pourboire sur Ko-fi",
 			version: (v: string) => `Version ${v}`,
 			versionDesc: "La version de Hearth que vous utilisez.",
 		},
@@ -4340,24 +4331,6 @@ export const fr: Translations = {
 			integrations: "Intégrations",
 			fun: "Détente",
 		},
-		request: {
-			railLabel: "Demander une carte",
-			heading: "Demander une carte",
-			intro:
-				"Il vous manque quelque chose ? Décrivez la carte que vous aimeriez dans Hearth — ce " +
-				"qu'elle afficherait et d'où viendraient ses données.",
-			footPrompt: "Pas ce que vous cherchiez ?",
-			footLink: "Demander une carte",
-			githubTitle: "Ouvrir un ticket GitHub",
-			githubDesc:
-				"Public, consultable, et le meilleur endroit pour discuter de l'idée. Nécessite un compte GitHub.",
-			githubAction: "Ouvrir GitHub",
-			emailTitle: "Envoyer un e-mail",
-			emailDesc: "Directement au mainteneur, si vous préférez ne pas utiliser GitHub. Ouvre votre application de messagerie.",
-			emailAction: "Ouvrir l'e-mail",
-			prefilledNote:
-				"Les deux s'ouvrent pré-remplis avec quelques questions et vos versions de Hearth et d'Obsidian — modifiez ce que vous voulez avant l'envoi.",
-		},
 	},
 
 	// ---- File-type filter labels ---------------------------------------
@@ -4417,8 +4390,7 @@ export const fr: Translations = {
 			snapshotConfirmRequired:
 				"Regardez d'abord l'image, puis activez « J'ai vérifié ».",
 			snapshotLeak:
-				"Si quelque chose de personnel y est lisible, ne publiez pas ce tableau : l'image ne peut pas être retirée une fois installée par d'autres. Signalez-le plutôt — c'est un bug du masquage, et il vaut la peine d'être corrigé avant que cela n'arrive à quelqu'un d'autre.",
-			snapshotLeakReport: "Le signaler sur GitHub",
+				"Si quelque chose de personnel y est lisible, ne publiez pas ce tableau : l'image ne peut pas être retirée une fois installée par d'autres.",
 			snapshotFailed: "Hearth n'a pas pu capturer le tableau.",
 			snapshotRequired:
 				"Une entrée de galerie nécessite une image du tableau. Prenez-en une d'abord — vous pourrez la regarder avant l'envoi.",

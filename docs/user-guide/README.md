@@ -98,5 +98,3 @@ developers and self-hosters rather than for users of the plugin:
   gallery server has to implement.
 - [`docs/gallery-hosting.md`](../gallery-hosting.md) — how to run your own
   dashboard gallery.
-- [`CONTRIBUTING.md`](../../CONTRIBUTING.md) — how to report bugs, suggest
-  features and contribute translations.
